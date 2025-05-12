@@ -6,9 +6,9 @@ A multimodal benchmark for evaluating machine learning models that extract struc
 
 ## About the Project
 
-**ChemX (Chemical Data Extraction Benchmark)** is a curated benchmark suite aimed at assessing and improving the performance of AI systems in extracting structured chemical information from scientific articles across multiple modalities: text, tables, and figures.
+**ChemX** is a curated benchmark suite aimed at assessing and improving the performance of AI systems in extracting structured chemical information from scientific articles across multiple modalities: text, tables, and figures.
 
-The benchmark covers diverse chemical topics, including nanomaterials, small-molecule bioactivity, chelate stability, ionic liquids, and pharmaceutical properties.
+The benchmark covers diverse chemical topics, including nanomaterials, small molecules, chelate complexes, and their properties relevant for various applications.
 
 !!! tip "Project Goal"
     Enable reliable and scalable chemical knowledge extraction by combining multimodal data annotation with expert validation, thereby accelerating downstream scientific research.
