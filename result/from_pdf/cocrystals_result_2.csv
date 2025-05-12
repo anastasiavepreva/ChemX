@@ -1,0 +1,469 @@
+pdf,description,instructions,prompt,output
+Xie2024.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""TMP-PABA"",""ratio_cocrystal"":""1:2"",""name_drug"":""Ligustrazine"",""SMILES_drug"":""C8H12N2"",""name_coformer"":""P-aminobenzoic acid"",""SMILES_coformer"":""C7H7NO2"",""photostability_change"":""increase""},{""name_cocrystal"":""TMP-MABA"",""ratio_cocrystal"":""1.5:1"",""name_drug"":""Ligustrazine"",""SMILES_drug"":""C8H12N2"",""name_coformer"":""3-Aminobenzoic acid"",""SMILES_coformer"":""C7H7NO2"",""photostability_change"":""increase""},{""name_cocrystal"":""TMP-DNBA"",""ratio_cocrystal"":""0.5:1"",""name_drug"":""Ligustrazine"",""SMILES_drug"":""C8H12N2"",""name_coformer"":""3,5-Dinitrobenzoic acid"",""SMILES_coformer"":""C7H4N2O6"",""photostability_change"":""increase""}]}"
+Teraoka2019.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""FUR-UREA"",""ratio_cocrystal"":""1:1"",""name_drug"":""Furosemide"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Urea"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""decrease""},{""name_cocrystal"":""FUR-NIC"",""ratio_cocrystal"":""1:1"",""name_drug"":""Furosemide"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Nicotinamide"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""}]}"
+Yutani2019.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""CBZ-SUC"",""ratio_cocrystal"":""2:1"",""name_drug"":""Carbamazepine"",""SMILES_drug"":""N#C1C=CC=CN1C2=CC=CC=C2"",""name_coformer"":""Succinic acid"",""SMILES_coformer"":""OC(CCC(=O)O)C=O"",""photostability_change"":""increase""},{""name_cocrystal"":""CBZ-SAC form I"",""ratio_cocrystal"":""1:1"",""name_drug"":""Carbamazepine"",""SMILES_drug"":""N#C1C=CC=CN1C2=CC=CC=C2"",""name_coformer"":""Saccharin"",""SMILES_coformer"":""O=S(=O)C1=CC=C(C=C1)NS(=O)(=O)C2=CC=CC=C2"",""photostability_change"":""increase""},{""name_cocrystal"":""CBZ-SAC form II"",""ratio_cocrystal"":""1:1"",""name_drug"":""Carbamazepine"",""SMILES_drug"":""N#C1C=CC=CN1C2=CC=CC=C2"",""name_coformer"":""Saccharin"",""SMILES_coformer"":""O=S(=O)C1=CC=C(C=C1)NS(=O)(=O)C2=CC=CC=C2"",""photostability_change"":""decrease""}]}"
+Qu2024.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""PYR-3IA NCS"",""ratio_cocrystal"":""NOT_DETECTED"",""name_drug"":""Pyrimethanil"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Indole-3-acetic acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""PYR-FMA NCS"",""ratio_cocrystal"":""2:1"",""name_drug"":""Pyrimethanil"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Fumaric acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""}]}"
+Dhakar2019.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""RES-NS"",""ratio_cocrystal"":""1:4"",""name_drug"":""Resveratrol"",""SMILES_drug"":""OC1=CC=CC=C1/C=C/C2=CC(O)=CC(O)=C2"",""name_coformer"":""NOT_DETECTED"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""OXY-NS"",""ratio_cocrystal"":""1:4"",""name_drug"":""Oxyresveratrol"",""SMILES_drug"":""OC1=CC(O)=C(O)C=C1/C=C/C2=CC(O)=CC(O)=C2"",""name_coformer"":""NOT_DETECTED"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""}]}"
+Nugrahani2023.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""LF-26"",""ratio_cocrystal"":""1:1"",""name_drug"":""Levofloxacin"",""SMILES_drug"":""C1([C@@H]2[C@H](NC[C@@](C2)(C(=O)O)O)C3=C(F)C(=O)C4=C5C=CC=CC5=NC=C4C3=O)=CC=CC=C1F"",""name_coformer"":""2,6-Dihydroxybenzoic acid"",""SMILES_coformer"":""OC(=O)C1=C(O)C=CC=C1O"",""photostability_change"":""increase""},{""name_cocrystal"":""LF-35"",""ratio_cocrystal"":""1:1"",""name_drug"":""Levofloxacin"",""SMILES_drug"":""C1([C@@H]2[C@H](NC[C@@](C2)(C(=O)O)O)C3=C(F)C(=O)C4=C5C=CC=CC5=NC=C4C3=O)=CC=CC=C1F"",""name_coformer"":""3,5-Dihydroxybenzoic acid"",""SMILES_coformer"":""OC(=O)C1=C(O)C=CC=C1O"",""photostability_change"":""increase""}]}"
+Diniz2024.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""DTIC-HOXA"",""ratio_cocrystal"":""NOT_DETECTED"",""name_drug"":""Dacarbazine"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Oxalic acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""DTIC-HMAL"",""ratio_cocrystal"":""NOT_DETECTED"",""name_drug"":""Dacarbazine"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Maleic acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""DTIC-H2FUM"",""ratio_cocrystal"":""NOT_DETECTED"",""name_drug"":""Dacarbazine"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Fumaric acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""DTIC-H2SUC"",""ratio_cocrystal"":""NOT_DETECTED"",""name_drug"":""Dacarbazine"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Succinic acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""DTIC-HCIT"",""ratio_cocrystal"":""NOT_DETECTED"",""name_drug"":""Dacarbazine"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Citric acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""}]}"
+Nugrahani2024.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""LFCA (2:1)"",""ratio_cocrystal"":""2:1"",""name_drug"":""Levofloxacin"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Citric acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""LF-metacetamol"",""ratio_cocrystal"":""NOT_DETECTED"",""name_drug"":""Levofloxacin"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Metacetamol"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""}]}"
+Kawabata2023.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""NPX-NA"",""ratio_cocrystal"":""2:1"",""name_drug"":""Naproxen"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Nicotinamide"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""decrease""},{""name_cocrystal"":""NPX-NA"",""ratio_cocrystal"":""2:1"",""name_drug"":""Naproxen"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Nicotinamide"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""decrease""},{""name_cocrystal"":""NPX-NA"",""ratio_cocrystal"":""2:1"",""name_drug"":""Naproxen"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Nicotinamide"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""decrease""}]}"
+Cugovčan2017.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""PZQ/MA"",""ratio_cocrystal"":""1:1"",""name_drug"":""Praziquantel"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Malic Acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""decrease""},{""name_cocrystal"":""PZQ/HP\u0019CD"",""ratio_cocrystal"":""1:1"",""name_drug"":""Praziquantel"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Hydroxypropyl-β-cyclodextrin"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""does not change""},{""name_cocrystal"":""PZQ/ME\u0019CD"",""ratio_cocrystal"":""1:1"",""name_drug"":""Praziquantel"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Randomly Methylated-β-cyclodextrin"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""decrease""},{""name_cocrystal"":""PZQ/HP\u0019CD/MA"",""ratio_cocrystal"":""1:1"",""name_drug"":""Praziquantel"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Hydroxypropyl-β-cyclodextrin, Malic Acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""decrease""}]}"
+Zheng2024.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""PLT-APC"",""ratio_cocrystal"":""1:1"",""name_drug"":""Lutein (LT)"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Adipic acid (APC)"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""MLT-APC"",""ratio_cocrystal"":""1:1"",""name_drug"":""Lutein (MLT)"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Adipic acid (APC)"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""PLT-APC"",""ratio_cocrystal"":""1:1"",""name_drug"":""Lutein (LT)"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Adipic acid (APC)"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""MLT-APC"",""ratio_cocrystal"":""1:1"",""name_drug"":""Lutein (MLT)"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Adipic acid (APC)"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""}]}"
+Eesam2020.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""CAR-HCT"",""ratio_cocrystal"":""2:0.5"",""name_drug"":""Carvedilol"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Hydrochlorothiazide"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""does not change""}]}"
+Li2020.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in the chemistry of cocrystals and their properties. Your area of expertise includes analyzing cocrystals, their components, and photostability changes.","Your task is to extract **every** mention of photostability for co-crystals from a scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `name_cocrystal` (string): name of cocrystal, as cited in the text, e.g. `""CAR-HCT""`, `""DMZ-SAC""`.  
+- `ratio_cocrystal` (string): molar ratio of the cocrystal components, e.g., `""2:1"", `""0.5:1"".
+- `name_drug` (string): name of the drug in the cocrystal as cited in the text, e.g. `""Carvedilol""`, `""Epalrestat""`.  
+- `SMILES_drug` (string): full SMILES representation of drug.  
+- `name_coformer` (string): name of the coformer in the cocrystal as cited in the text, e.g. `""Saccharin""`, `""Oxalic acid""`.   
+- `SMILES_coformer` (string): full SMILES representation of coformer.  
+- `photostability_change` (string): one of `""decrease""`, `""does not change""`, or `""increase""`. Trend of photostability for both the cocrystal and the drug, indicating how their stability changes over time.
+Extraction rules:
+1. Extract **each** photostability mention as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If multiple polymorphic forms (e.g., CBZ-SAC Form I, CBZ-SAC Form II) appear for the same drug and coformer in the same ratio, extract each separately. 
+4. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+5. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of photostability for co-crystals present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""name_cocrystal"": ""CAR-HCT"",
+    ""ratio_cocrystal"": ""2:1"",
+    ""name_drug"": ""Carvedilol"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Saccharin"",
+    ""SMILES_coformer"": ""O=C(O)CC(O)C(=O)O"",
+    ""photostability_change"": ""decrease""
+  },
+  {
+    ""name_cocrystal"": ""DMZ-SAC"",
+    ""ratio_cocrystal"": ""0.5:1"",
+    ""name_drug"": ""Epalrestat"",
+    ""SMILES_drug"": ""C1=CC(=C(C=C1O)O)C=CC2=CC(=CC(=C2)O)O"",
+    ""name_coformer"": ""Oxalic acid"",
+    ""SMILES_coformer"": ""C(=C/C(=O)O)\\C(=O)O"",
+    ""photostability_change"": ""does not change""
+  }
+]","{""samples"":[{""name_cocrystal"":""NVP-THA"",""ratio_cocrystal"":""1:1"",""name_drug"":""4-(1-Naphthylvinyl)pyridine"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Tetrafluoro-4-hydroxybenzoic acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""},{""name_cocrystal"":""NVP-THA"",""ratio_cocrystal"":""1:1"",""name_drug"":""4-(1-Naphthylvinyl)pyridine"",""SMILES_drug"":""NOT_DETECTED"",""name_coformer"":""Tetrafluoro-4-hydroxybenzoic acid"",""SMILES_coformer"":""NOT_DETECTED"",""photostability_change"":""increase""}]}"
