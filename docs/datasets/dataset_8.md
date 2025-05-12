@@ -34,6 +34,7 @@ The dataset contains data on the corneal permeability of small molecules represe
 | access            | Access status: 1 = open, 0 = closed                                              |
 | page              | Page number where the data was located                                          |
 | origin            | Source location within the article (e.g., table 3)                              |
+
 ---
 
 ## Metadata
@@ -80,15 +81,13 @@ Comprehensive metadata is provided for each entry, including bibliographic detai
 
 ## Validation Results
 
-**Validation process description:**
+In the Eye Drops dataset, 
+**23 corrections** were applied (**20 pattern-based** and **3 isolated**) 
+across **163 rows**. Affected fields included `perm (cm/s)`, `name`, and `smiles`. 
+Errors stemmed from inconsistencies between compound names and structures, 
+along with occasional misentries in permeability values.
 
-- Manual drawing and curation of SMILES structures based on compound names and supplementary information in the articles  
-- Cross-checking of permeability/logP values and recalculation where needed  
-- Manual verification of each entry by a designated validator (Xenia), including:  
-  • Verification of chemical structure accuracy  
-  • Accuracy of permeability and logP values  
-  • Verification of bibliographic metadata  
-- Error flags (`has_mistake_in_data`, `has_mistake_in_metadata`) used to track issues  
-- Verification status (`Verified`) and date recorded  
+![Eye Drops_bar_total_corrections.svg](..%2Fassets%2FEye%20Drops_bar_total_corrections.svg)
 
----
+
+

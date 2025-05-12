@@ -5,7 +5,7 @@
 
 ## Overview
 
-This section outlines the methodological framework of the **ChemEx** project, which forms the foundation for creating high-quality, multimodal chemical datasets.  
+This section outlines the methodological framework of the **ChemX** project, which forms the foundation for creating high-quality, multimodal chemical datasets.  
 It presents the core pipeline stages — from extraction to benchmarking — and highlights the guiding principles behind the design of the data processing workflows.
 
 ---
@@ -21,7 +21,7 @@ graph TD
     E --> F[Benchmarking & Evaluation]
 ```
 
-<small>Core data processing pipeline used in ChemEx</small>
+<small>Core data processing pipeline used in ChemX</small>
 
 ---
 
@@ -77,7 +77,7 @@ Performance of automated methods is assessed via structured benchmarks using man
 ## Relationship to Datasets
 
 !!! tip "Applying the Pipeline to ChemX Datasets"
-    - All datasets are processed through the unified ChemEx pipeline  
+    - All datasets are processed through the unified ChemX pipeline  
     - Method parameters are tuned to the specifics of each dataset (e.g., image-heavy nanomaterials vs. text-based small molecules)  
     - Validation and benchmarking outcomes are documented and released with the datasets
 
@@ -87,5 +87,5 @@ Performance of automated methods is assessed via structured benchmarks using man
 
 ## Conclusion
 
-The ChemEx methodology provides a robust and scalable framework for producing high-quality chemical datasets.  
+The ChemX methodology provides a robust and scalable framework for producing high-quality chemical datasets.  
 It bridges cutting-edge AI tools with expert human oversight, enabling reliable information extraction across the complex landscape of chemical literature.

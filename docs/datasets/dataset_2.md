@@ -93,26 +93,11 @@ The goal of the dataset is to support research in nanotoxicology by enabling ana
 
 ## Validation Results
 
-Validation was carried out manually using the original PDF articles available in the folder `seltox_article_list(only)`. Each record was cross-checked against the article to verify:
+The SelTox dataset underwent **51 corrections** (**48 pattern-based** and **3 isolated**). 
+Errors were mostly located in `np_synthesis`, `strain`, and `bacteria` columns, 
+typically reflecting inconsistent terminology for biological strains or procedural details. 
+Most issues were recurring and resolved via rule-based updates.
 
-- Numerical accuracy (e.g., MIC values, nanoparticle sizes)  
-- Correctness of units and synthesis parameters  
-- Completeness of metadata (title, journal, DOI)
 
-The validation results are documented in the file: `Validation_SelTox_NeurIPS_updated_data`
-
-Key columns in the validation table include:
-
-- `verification required`  
-- `verified_by`  
-- `verification_date`  
-- `has_mistake_in_data`  
-- `has_mistake_in_metadata`  
-- `entry_status` (e.g., Requires correction)
-
-Example of issues flagged:
-
-- Entry 2897 marked as `Requires correction` due to mistakes in data  
-- All validation entries include timestamp and verifier name
 
 ---

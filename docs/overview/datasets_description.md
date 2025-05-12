@@ -49,19 +49,18 @@ Each dataset is provided in a structured tabular format (CSV or Parquet), and is
 ---
 
 ## Summary Table of Datasets
-
-| Dataset Name           | Domain          | Records | Modalities             | Expert Validation | Link                                    |
-|------------------------|-----------------|---------|------------------------|--------------------|-----------------------------------------|
-| Cytotoxicity           | Nanomaterials   | 5535    | Text, tables, figures  | ✅                  | [Learn more](../datasets/dataset_1.md)  |
-| SelTox                 | Nanomaterials   | 3286    | Text, tables, figures  | ✅                  | [Learn more](../datasets/dataset_2.md)  |
-| Synergy                | Nanomaterials   | 3226    | Text, tables, diagrams | ✅                  | [Learn more](../datasets/dataset_3.md)  |
-| Nanozymes              | Nanomaterials   | 1133    | Text, diagrams         | ✅                  | [Learn more](../datasets/dataset_4.md)  |
-| Magnetic nanomaterials | Nanomaterials   | 2579    | Text, tables           | ✅                  | [Learn more](../datasets/dataset_11.md) |
-| Benzimidazoles         | Small molecules | 1721    | SMILES, numeric values | ✅                  | [Learn more](../datasets/dataset_5.md)  |
-| Oxazolidinones         | Small molecules | 3103    | SMILES, numeric values | ✅                  | [Learn more](../datasets/dataset_6.md)  |
-| Chelate Complexes      | Small molecules | 907     | SMILES, lgK            | ✅                  | [Learn more](../datasets/dataset_7.md)  |
-| Eye Drops              | Small molecules | 163     | SMILES, permeability   | ✅                  | [Learn more](../datasets/dataset_8.md)  |
-| Photostability         | Small molecules | 70      | SMILES, photostability | ✅                  | [Learn more](../datasets/dataset_9.md)  |
+| Dataset Name           | Domain          | Records | Expert Validation | Link                                    |
+|------------------------|-----------------|---------|--------------------|-----------------------------------------|
+| Cytotoxicity           | Nanomaterials   | 5476    | ✅                  | [Learn more](../datasets/dataset_1.md)  |
+| SelTox                 | Nanomaterials   | 3244    | ✅                  | [Learn more](../datasets/dataset_2.md)  |
+| Synergy                | Nanomaterials   | 3226    | ✅                  | [Learn more](../datasets/dataset_3.md)  |
+| Nanozymes              | Nanomaterials   | 1135    | ✅                  | [Learn more](../datasets/dataset_4.md)  |
+| Magnetic nanomaterials | Nanomaterials   | 2578    | ✅                  | [Learn more](../datasets/dataset_11.md) |
+| Benzimidazoles         | Small molecules | 1721    | ✅                  | [Learn more](../datasets/dataset_5.md)  |
+| Oxazolidinones         | Small molecules | 2923    | ✅                  | [Learn more](../datasets/dataset_6.md)  |
+| Chelate Complexes      | Small molecules | 907     | ✅                  | [Learn more](../datasets/dataset_7.md)  |
+| Eye Drops              | Small molecules | 163     | ✅                  | [Learn more](../datasets/dataset_8.md)  |
+| Co-crystals         | Small molecules | 70      | ✅                  | [Learn more](../datasets/dataset_9.md)  |
 
 --- 
 

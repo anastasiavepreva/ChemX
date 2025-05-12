@@ -120,17 +120,12 @@ The dataset is intended for tasks such as **scientific information extraction**,
 
 ## Validation Results
 
-Validation was performed manually using PDF versions of the articles located in the folder `benz_pdfs`. Each record was checked for:
+The Benzimidazoles dataset contained 
+**77 corrections** (**63 pattern-based**, **14 isolated**), 
+with the primary error loci being `smiles`, `target_value`, and `compound_id`. 
+Common mistakes included inconsistent or incomplete `SMILES` structures and naming mismatches, 
+often reflecting variable conventions across original publications.
 
-- Accuracy of the SMILES structure vs. the diagram in the paper  
-- Correctness of MIC values (units, relation sign, numeric value)  
-- Match between bacteria and its mentioned source  
-- Proper assignment of page numbers and origin types (table, text, image)
 
-The file includes:
 
-- Whether verification is required (`verification required`)  
-- Which records were verified  
-- Status of verification  
 
----

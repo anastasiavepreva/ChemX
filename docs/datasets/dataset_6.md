@@ -97,6 +97,10 @@ Extraction of chemical structures of antibiotics from the oxazolidinone class an
 
 ## Validation Results
 
-Coming soon.
+The Oxazolidinones dataset showed high structural consistency, 
+requiring **69 corrections**, all of which followed identifiable patterns. 
+No isolated errors were observed. Corrections were primarily localized to 
+`smiles`, `compound_id`, and `target_type`, and could be resolved through deterministic rules, 
+indicating a uniform and well-structured source dataset.
 
----
+

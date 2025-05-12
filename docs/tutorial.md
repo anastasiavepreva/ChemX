@@ -1,6 +1,6 @@
-# Loading and Working with ChemEx Datasets
+# Loading and Working with Chemx Datasets
 
-This section demonstrates a basic usage scenario of one of the ChemEx datasets hosted on Hugging Face. The following code is fully reproducible in Google Colab or any Jupyter-based environment.
+This section demonstrates a basic usage scenario of one of the ChemX datasets hosted on Hugging Face. The following code is fully reproducible in Google Colab or any Jupyter-based environment.
 
 The demo uses the **cytox_NeurIPS_updated_data** dataset, which contains cytotoxicity data for various nanomaterials.  
 This example includes:
@@ -61,7 +61,7 @@ df.head()
 
 ## 4. Download and View Croissant Metadata
 
-Each dataset in ChemEx includes a **Croissant file** — a machine-readable schema and metadata description in JSON-LD format.  
+Each dataset in ChemX includes a **Croissant file** — a machine-readable schema and metadata description in JSON-LD format.  
 It is used for structural validation, typing, and metadata inspection.
 
 ```python

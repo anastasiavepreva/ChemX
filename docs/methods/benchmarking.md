@@ -4,7 +4,7 @@
 
 ## General Concept
 
-Benchmarking in the **ChemExtra** project is aimed at evaluating the performance of automated systems for extracting chemical information from scientific literature.
+Benchmarking in the **ChemX** project is aimed at evaluating the performance of automated systems for extracting chemical information from scientific literature.
 
 The evaluation compares different approaches and types of models, including:
 

@@ -101,10 +101,11 @@ The aim of the dataset is to contribute to the investigation of the patterns bet
 
 ## Validation Results
 
-Validation was performed manually using PDF versions of the publications. For each record, the following were checked:
+In the Cytotox dataset, a total of **1,351 corrections** were identified, nearly all of which (**1,350**) were **pattern-based**. 
+These were mostly found in the `cell_type`, `test`, and `test_indicator` columns. 
+The predominant problems involved terminology inconsistencies, abbreviation mismatches, and stylistic variation across sources. 
+The high pattern consistency enabled efficient rule-based correction.
 
-- Data consistency with the original article  
-- Correctness of numerical values and units of measurement  
-- Presence and accuracy of fields such as "cell tissue", "cell morphology", "Hydrodynamic diameter", etc.
+
 
 ---

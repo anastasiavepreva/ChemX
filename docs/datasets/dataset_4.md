@@ -87,6 +87,10 @@ The dataset supports comprehensive **benchmarking of nanozyme activity** and dee
 
 ## Validation Results
 
-Coming soon.
+The Nanozymes dataset underwent **439 corrections** across **1,135 rows** and **21 columns**, comprising **398 pattern-based** and **41 isolated issues**. 
+The most frequently affected fields were `syngony`, `formula`, and `temperature`. 
+Common errors included inferred values not explicitly stated in the source material—particularly crystal symmetry—along with formatting inconsistencies in chemical formulas and unit reporting. 
+Many corrections followed recurring patterns within individual articles, allowing reliable extrapolation across related entries.
 
----
+
+

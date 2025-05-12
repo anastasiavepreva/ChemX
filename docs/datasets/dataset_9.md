@@ -93,28 +93,4 @@ Information was extracted from peer-reviewed publications and supplementary mate
 
 Manual validation flags indicate entries needing correction or further review.
 
----
 
-## Validation Results
-
-**Validation process description:**
-
-- Manual extraction of drug/coformer names and their SMILES from figures and text  
-- Recording the component ratio and photostability change as described in the article  
-- Cross-checking SMILES for accuracy and consistency  
-- Flagging issues such as:  
-  • Errors in SMILES (drug or coformer)  
-  • Missing or inaccurate origin details  
-  • Unclear photostability interpretation  
-
-**Validation metadata includes:**
-
-- `verification_required`: Whether manual review was needed  
-- `verified_by`: Validator's name  
-- `verification_date`: Date of review  
-- `has_mistake_in_data`: Whether data errors were found  
-- `has_mistake_in_metadata`: Whether metadata errors were found  
-- `entry_status`: Final status (e.g., Verified, Requires correction)  
-- `comment`: Notes on specific issues (e.g., incorrect SMILES)  
-
----

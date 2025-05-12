@@ -107,27 +107,3 @@ The dataset captures:
 
 This dataset is intended to support research in **nanomedicine** and **antimicrobial resistance**, particularly in the design and evaluation of **nanoparticle-drug combinations** with synergistic effects.
 
----
-
-## Validation Results
-
-Validation was performed manually using the original PDF articles located in the folder: `synergy_article_list`.
-
-Each dataset entry was cross-checked for:
-
-- Consistency with original source data  
-- Accuracy of numerical values and units (e.g., MIC, ZOI)  
-- Correctness of metadata (journal, DOI, title)
-
-Validation results are contained in: `Validation_synergy_NeurIPS_updated_data`
-
-Key fields in the validation file include:
-
-- `verification required`  
-- `verified_by`  
-- `verification_date`  
-- `has_mistake_in_data`  
-- `has_mistake_in_metadata`  
-- `entry_status`
-
----

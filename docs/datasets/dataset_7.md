@@ -87,5 +87,12 @@ This dataset can be used to facilitate the study of metal–ligand binding behav
 
 ## Validation Results
 
-*Coming soon.*
+The Complexes dataset exhibited 
+**212 corrections** (**190 pattern-based** and **22 isolated**) across **907 rows** and **6 columns**. 
+Errors were concentrated in the `compound_name`, `compound_id`, and `SMILES` columns. 
+Recurring issues involved incomplete mapping of compounds to figure annotations (e.g., missing IDs like “9A”), 
+and tautomeric or scaffold inconsistencies in `SMILES` strings due to batch extraction from multi-ligand diagrams. 
+These errors frequently repeated within figure groups, enabling the derivation of correction rules.
+
+![Complexes_bar_total_corrections.svg](..%2Fassets%2FComplexes_bar_total_corrections.svg)
 

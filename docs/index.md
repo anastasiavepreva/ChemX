@@ -13,7 +13,9 @@ The benchmark covers diverse chemical topics, including nanomaterials, small mol
 !!! tip "Project Goal"
     Enable reliable and scalable chemical knowledge extraction by combining multimodal data annotation with expert validation, thereby accelerating downstream scientific research.
 
-![Текст](assets/main_page-0001.jpg)
+![Text](assets/main_figure-1.png)
+
+
 ---
 
 ## Key Features
