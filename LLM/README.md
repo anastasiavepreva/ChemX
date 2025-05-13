@@ -10,7 +10,7 @@ Poppler has to be installed and added to PATH, follow the instructions [here](ht
 
 ## 🚀 Usage
 
-1. Put datasets into ```data/datasets``` folder and article PDFs into ```data/pdfs/pdf_<dataset>``` folders.
+1. Put open access article PDFs into ```data/pdfs/pdf_<dataset>``` folders.
 
 2. Merge article and supporting infromation files. Dataset keys: ```oxazolidinone, benzimidazole, cocrystals, complexes, nanozymes, magnetic, cytotoxicity, seltox, synergy```.
 
