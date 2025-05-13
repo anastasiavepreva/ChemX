@@ -1,0 +1,112 @@
+pdf,description,instructions,prompt,output
+uzal2022.pdf,You are a domain-specific chemical information extraction assistant.,You specialize in the chemistry of organometallic complexes and their properties.,"Your task is to extract **every** mention of organometallic complexes and chelate ligands from scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a complex within the article, as cited in the text, e.g. `""L3""`, `""A31""`.  
+- `compound_name` (string): abbreviated or full name of the complex or ligand as cited in the text, e.g. `""DOTA""`, `""tebroxime""`. 
+- `SMILES` (string): full SMILES representation of ligand environment or single ligand.  If a complete organometallic complex is shown, extract all ligand structures without mentioning the metal (e.g., ""COc1cc(C=CC([O-])CC([O-])CC([O-])C=Cc2ccc(O)c(OC)c2)ccc1O. [C-]#[O+].[C-]#[O+].[C-]#[O+].[OH-]""). For a chelate ligand without a complete organometallic complex, extract only that ligand's structure (e.g., 'O=C(O)CN(CCN(CC(CC(=O)O)CC(=O)O)CCN(CC(=O)O)CC(=O)O').
+- `SMILES_type` (string): one of `""ligand""` or `""environment""`. ""environment"" refers to the entire organometallic complex, including one or more ligands and a metal atom. ""ligand"" signifies a single chelate ligand, which is an organic molecule.
+- `target_value` (number): the numeric value of logarithms of thermodynamic stability constants lgK or logK (without quotes). 
+Extraction rules:
+1. Extract **each** mention of `target_value` (lgK or logK) as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID or name into one molecule and write it a single SMILES string.
+4. If multiple thermodynamic stability constants appear for the same complex or ligand extract each separately. 
+5. Extract only structures that comply with these rules:
+5.1. The complexes must contain **Gd** as the metal or the ligands must belong to complexes of that metal.
+5.2. The complete molecular structure shall be given without errors in it or identifiers.
+5.3. Compounds must contain more than one carbon (exclude CO, Me).
+5.4. Compounds must not contain polymeric structures, attached biomolecules or carboranes, undefined radicals, undeciphered designations (e.g., amino acids) beyond the simplest abbreviations (i.e., Me, Et, Pr, Bu, Ph, Ac), names of radicals instead of their structure, or incomplete indication of the ligand structure (e.g., L = P, N).
+5.5. Compounds must not be reaction intermediate or precursor.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of organometallic complexes and / or chelate ligands present in the article.
+Output **must** be a single JSON array, like:
+[
+    {
+        ""compound_id"": ""L3"",
+        ""compound_name"": ""DOTA"",
+        ""SMILES"": ""O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",
+        ""SMILES_type"": ""ligand"",
+        ""target"": 21.3
+    },
+    {
+        ""compound_id"": ""A31"",
+        ""compound_name"": ""tebroxime"",
+        ""SMILES"": ""[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC"",
+        ""SMILES_type"": ""environment"",
+        ""target"": 17.9
+    }
+]","{""samples"":[{""compound_id"":""A28"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":9.94},{""compound_id"":""A29"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":9.5},{""compound_id"":""B1"",""compound_name"":""H4DOTA"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":25.8},{""compound_id"":""B2"",""compound_name"":""H4DOTMA"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":22.3},{""compound_id"":""B5"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":18.56},{""compound_id"":""B6"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":19.35},{""compound_id"":""B7"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":18.8},{""compound_id"":""B8"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":17.85},{""compound_id"":""B9"",""compound_name"":""H8DOTP"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":24.7},{""compound_id"":""B10"",""compound_name"":""H4DOTPEt"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":19.56},{""compound_id"":""B11"",""compound_name"":""H4DOTPMeOH"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":19.9},{""compound_id"":""B12"",""compound_name"":""H4DOTPOEt"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":21.52},{""compound_id"":""B13"",""compound_name"":""H4DOTPOBu"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":21.66},{""compound_id"":""B14"",""compound_name"":""H3DO3A"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":22.24},{""compound_id"":""B30"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":18.96},{""compound_id"":""B31"",""compound_name"":""NOT_DETECTED"",""SMILES_type"":""ligand"",""SMILES"":""NOT_DETECTED"",""target"":16.51}]}"
+wadas2010.pdf,You are a domain-specific chemical information extraction assistant.,You specialize in the chemistry of organometallic complexes and their properties.,"Your task is to extract **every** mention of organometallic complexes and chelate ligands from scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a complex within the article, as cited in the text, e.g. `""L3""`, `""A31""`.  
+- `compound_name` (string): abbreviated or full name of the complex or ligand as cited in the text, e.g. `""DOTA""`, `""tebroxime""`. 
+- `SMILES` (string): full SMILES representation of ligand environment or single ligand.  If a complete organometallic complex is shown, extract all ligand structures without mentioning the metal (e.g., ""COc1cc(C=CC([O-])CC([O-])CC([O-])C=Cc2ccc(O)c(OC)c2)ccc1O. [C-]#[O+].[C-]#[O+].[C-]#[O+].[OH-]""). For a chelate ligand without a complete organometallic complex, extract only that ligand's structure (e.g., 'O=C(O)CN(CCN(CC(CC(=O)O)CC(=O)O)CCN(CC(=O)O)CC(=O)O').
+- `SMILES_type` (string): one of `""ligand""` or `""environment""`. ""environment"" refers to the entire organometallic complex, including one or more ligands and a metal atom. ""ligand"" signifies a single chelate ligand, which is an organic molecule.
+- `target_value` (number): the numeric value of logarithms of thermodynamic stability constants lgK or logK (without quotes). 
+Extraction rules:
+1. Extract **each** mention of `target_value` (lgK or logK) as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID or name into one molecule and write it a single SMILES string.
+4. If multiple thermodynamic stability constants appear for the same complex or ligand extract each separately. 
+5. Extract only structures that comply with these rules:
+5.1. The complexes must contain **Ga** as the metal or the ligands must belong to complexes of that metal.
+5.2. The complete molecular structure shall be given without errors in it or identifiers.
+5.3. Compounds must contain more than one carbon (exclude CO, Me).
+5.4. Compounds must not contain polymeric structures, attached biomolecules or carboranes, undefined radicals, undeciphered designations (e.g., amino acids) beyond the simplest abbreviations (i.e., Me, Et, Pr, Bu, Ph, Ac), names of radicals instead of their structure, or incomplete indication of the ligand structure (e.g., L = P, N).
+5.5. Compounds must not be reaction intermediate or precursor.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of organometallic complexes and / or chelate ligands present in the article.
+Output **must** be a single JSON array, like:
+[
+    {
+        ""compound_id"": ""L3"",
+        ""compound_name"": ""DOTA"",
+        ""SMILES"": ""O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",
+        ""SMILES_type"": ""ligand"",
+        ""target"": 21.3
+    },
+    {
+        ""compound_id"": ""A31"",
+        ""compound_name"": ""tebroxime"",
+        ""SMILES"": ""[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC"",
+        ""SMILES_type"": ""environment"",
+        ""target"": 17.9
+    }
+]","{""samples"":[{""compound_id"":""L2"",""compound_name"":""tris(2-mercaptobenzyl)amine"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":20.5},{""compound_id"":""L4"",""compound_name"":""BAT-TM"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":20.3},{""compound_id"":""L5"",""compound_name"":""EC"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":31.5},{""compound_id"":""L10"",""compound_name"":""EDTA"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":21.0},{""compound_id"":""L11"",""compound_name"":""HBED"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":37.7},{""compound_id"":""L11"",""compound_name"":""HBED"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":38.5},{""compound_id"":""L12"",""compound_name"":""DTPA"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":25.5},{""compound_id"":""L15"",""compound_name"":""SBAD"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":28.3},{""compound_id"":""L16"",""compound_name"":""BAPEN"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":21.4},{""compound_id"":""L27"",""compound_name"":""TACN-TM"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":36.1},{""compound_id"":""L29"",""compound_name"":""NOTA"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":30.1},{""compound_id"":""L39"",""compound_name"":""DOTA"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":21.3},{""compound_id"":""L49"",""compound_name"":""TETA"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":19.7},{""compound_id"":""L57"",""compound_name"":""CB-TE2A"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":36.9},{""compound_id"":""L23"",""compound_name"":""DFO"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":28.6},{""compound_id"":""L20"",""compound_name"":""DiP-LICAM"",""SMILES_type"":""environment"",""SMILES"":""NOT_DETECTED"",""target"":38.6}]}"
+abram2006.pdf,You are a domain-specific chemical information extraction assistant.,You specialize in the chemistry of organometallic complexes and their properties.,"Your task is to extract **every** mention of organometallic complexes and chelate ligands from scientific article, and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a complex within the article, as cited in the text, e.g. `""L3""`, `""A31""`.  
+- `compound_name` (string): abbreviated or full name of the complex or ligand as cited in the text, e.g. `""DOTA""`, `""tebroxime""`. 
+- `SMILES` (string): full SMILES representation of ligand environment or single ligand.  If a complete organometallic complex is shown, extract all ligand structures without mentioning the metal (e.g., ""COc1cc(C=CC([O-])CC([O-])CC([O-])C=Cc2ccc(O)c(OC)c2)ccc1O. [C-]#[O+].[C-]#[O+].[C-]#[O+].[OH-]""). For a chelate ligand without a complete organometallic complex, extract only that ligand's structure (e.g., 'O=C(O)CN(CCN(CC(CC(=O)O)CC(=O)O)CCN(CC(=O)O)CC(=O)O').
+- `SMILES_type` (string): one of `""ligand""` or `""environment""`. ""environment"" refers to the entire organometallic complex, including one or more ligands and a metal atom. ""ligand"" signifies a single chelate ligand, which is an organic molecule.
+- `target_value` (number): the numeric value of logarithms of thermodynamic stability constants lgK or logK (without quotes). 
+Extraction rules:
+1. Extract **each** mention of `target_value` (lgK or logK) as a separate object.  
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts.  
+3. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID or name into one molecule and write it a single SMILES string.
+4. If multiple thermodynamic stability constants appear for the same complex or ligand extract each separately. 
+5. Extract only structures that comply with these rules:
+5.1. The complexes must contain **Tc** as the metal or the ligands must belong to complexes of that metal.
+5.2. The complete molecular structure shall be given without errors in it or identifiers.
+5.3. Compounds must contain more than one carbon (exclude CO, Me).
+5.4. Compounds must not contain polymeric structures, attached biomolecules or carboranes, undefined radicals, undeciphered designations (e.g., amino acids) beyond the simplest abbreviations (i.e., Me, Et, Pr, Bu, Ph, Ac), names of radicals instead of their structure, or incomplete indication of the ligand structure (e.g., L = P, N).
+5.5. Compounds must not be reaction intermediate or precursor.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.  
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** mentions of organometallic complexes and / or chelate ligands present in the article.
+Output **must** be a single JSON array, like:
+[
+    {
+        ""compound_id"": ""L3"",
+        ""compound_name"": ""DOTA"",
+        ""SMILES"": ""O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",
+        ""SMILES_type"": ""ligand"",
+        ""target"": 21.3
+    },
+    {
+        ""compound_id"": ""A31"",
+        ""compound_name"": ""tebroxime"",
+        ""SMILES"": ""[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC"",
+        ""SMILES_type"": ""environment"",
+        ""target"": 17.9
+    }
+]","{""samples"":[{""compound_id"":""NOT_DETECTED"",""compound_name"":""methoxyisobutylisonitrile"",""SMILES_type"":""environment"",""SMILES"":""CC(C)COC1=CC=CC=C1C#N.[Tc+3].[c-]#n"",""target"":21.3},{""compound_id"":""NOT_DETECTED"",""compound_name"":""HYNIC-TOC"",""SMILES_type"":""ligand"",""SMILES"":""C1=CC=C(C=C1)C(=O)NNC(=O)C1=CC=CC=C1NC1C(O)C(NC2CCCC2)CO1"",""target"":19.8}]}"

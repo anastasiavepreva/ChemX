@@ -1,0 +1,142 @@
+compound_id,smiles,target_type,target_relation,target_value,target_units,bacteria,pdf
+11a,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11a,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11a,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,256.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11a,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11b,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11b,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11b,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11b,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11c,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11c,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11c,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11c,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11d,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11d,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11d,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,256.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11d,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11e,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11e,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11e,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11e,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11f,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,256.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11f,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11f,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11f,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11g,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11g,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,256.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11g,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11g,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11h,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11h,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11h,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,64.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11h,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,128.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+11i,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+11i,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,256.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+11i,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+11i,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,>,256.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12a,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12a,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12a,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12a,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,16.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12b,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12b,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12b,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12b,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12c,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,64.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12c,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12c,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12c,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12d,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12d,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,64.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12d,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,64.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12d,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,64.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12e,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12e,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12e,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,16.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12e,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12f,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12f,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12f,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,64.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12f,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,64.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12g,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12g,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12g,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,32.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12g,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+12h,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+12h,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+12h,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+12h,C1COC2=C(N=CC=C2)C1CN(X)C(=O)N(C3CCOCC3)OR,MIC,=,128.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+Linezolid,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,2.0,µg/mL,S. Aureus Atcc 25923,molecules27031103
+Linezolid,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,2.0,µg/mL,S. Pneumoniae Atcc 49619,molecules27031103
+Linezolid,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,2.0,µg/mL,B. Subtilis Bncc 109047,molecules27031103
+Linezolid,C1COC2=C(N=CC=C2)C1CN(CO)C(=O)NC3CCOCC3,MIC,=,2.0,µg/mL,S. Epidermidis Bncc 186652,molecules27031103
+2,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)C4=CC=C(C=C4)N,MIC,=,1.17,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+2,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)C4=CC=C(C=C4)N,MIC,=,1.17,µg/mL,Staphylococcus aureus MTCC 2940,ph16040516
+2,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)C4=CC=C(C=C4)N,MIC,=,1.17,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+2,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)C4=CC=C(C=C4)N,MBC,=,2.34,µg/mL,Bacillus subtilis,ph16040516
+2,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)C4=CC=C(C=C4)N,MBC,=,2.34,µg/mL,Staphylococcus aureus MLS-16,ph16040516
+2,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)C4=CC=C(C=C4)N,MBC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,1.17,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,4.68,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,18.75,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,1.17,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MBC,=,4.68,µg/mL,Bacillus subtilis,ph16040516
+3a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MBC,=,9.36,µg/mL,Staphylococcus aureus MLS-16,ph16040516
+3a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MBC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,2.34,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,18.75,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)[N+](=O)[O-],MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)[N+](=O)[O-],MIC,=,37.5,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)[N+](=O)[O-],MIC,=,4.68,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)[N+](=O)[O-],MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)[N+](=O)[O-],MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)F,MIC,=,18.75,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)F,MIC,=,75.0,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)F,MIC,=,125.0,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC(=CC(=C3)S(=O)(=O)O)F,MIC,=,75.0,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3e,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)OC,MIC,=,37.5,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3e,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)OC,MIC,=,4.68,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3f,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)Cl,MIC,=,9.36,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3f,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)Cl,MIC,=,9.36,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3f,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)Cl,MIC,=,4.68,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3f,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)Cl,MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3g,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)F,MIC,=,125.0,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3g,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)F,MIC,=,37.5,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3g,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)F,MIC,=,125.0,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3g,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)S(=O)(=O)NC4=CC=C(C=C4)F,MIC,=,75.0,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3h,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC4=C3OC(=C4)F,MIC,=,37.5,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3h,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC4=C3OC(=C4)F,MIC,=,18.75,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3h,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC4=C3OC(=C4)F,MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3h,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC4=C3OC(=C4)F,MIC,=,18.75,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC=C3,MIC,=,37.5,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC=C3,MIC,=,18.75,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+3i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC=C3,MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+3i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=CC=C3,MIC,=,18.75,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+3j,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)O,MIC,=,2.34,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+3j,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)O,MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+4a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=CC=C4,MIC,=,9.36,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+4a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=CC=C4,MIC,=,75.0,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+4a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=CC=C4,MIC,=,18.75,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+4a,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=CC=C4,MIC,=,3.37,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+4b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CN=CN=C4,MIC,=,37.5,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+4b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CN=CN=C4,MIC,=,18.75,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+4b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CN=CN=C4,MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+4b,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CN=CN=C4,MIC,=,18.75,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+4c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=NC=C4)F,MIC,=,2.34,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+4c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=NC=C4)F,MIC,=,4.68,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+4c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=NC=C4)F,MIC,=,18.75,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+4c,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=NC=C4)F,MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+4d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=CC=C4)Cl,MIC,=,2.34,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+4d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=CC=C4)Cl,MIC,=,18.75,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+4d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=CC=C4)Cl,MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+4d,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC(=CC=C4)Cl,MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+4e,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=C(C=CC=N4)Cl,MIC,=,2.34,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+4e,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=C(C=CC=N4)Cl,MIC,=,4.68,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+4e,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=C(C=CC=N4)Cl,MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+4e,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=C(C=CC=N4)Cl,MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516
+4i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=C(C=C4)C,MIC,=,37.5,µg/mL,Bacillus subtilis MTCC 121,ph16040516
+4i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=C(C=C4)C,MIC,=,4.68,µg/mL,Staphylococcus aureus MLS-16 MTCC 2940,ph16040516
+4i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=C(C=C4)C,MIC,=,37.5,µg/mL,Staphylococcus aureus MTCC 96,ph16040516
+4i,C1CO[C@@H](N1C2=CC=C(C=C2)F)C(=O)NCC3=CC=C(C=C3)C(=O)NC4=CC=C(C=C4)C,MIC,=,4.68,µg/mL,Pseudomonas aeruginosa MTCC 2453,ph16040516

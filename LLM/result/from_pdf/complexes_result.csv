@@ -1,0 +1,109 @@
+pdf,description,instructions,promt,output
+abram2006.pdf,You are a PDF retrieval assistant.,"You are a helpful assistant in the field of chemistry, specializing in organometallic complexes.","Your task is to efficiently analyze the content of the provided article PDF and extract information about **ALL** structures of organometallic complexes and/or chelate ligands, except for the structure extraction constraints noted below. Typically, articles contain several experiments with organometallic complexes and/or chelate ligands with or without measured logarithms of thermodynamic stability constants (lgK). For each organometallic complex and/or chelate ligand, extract the following information: 
+1. Compound ID: Each compound mentioned in an article usually has its own ID (for example, ""L1"", ""A12"", ""35"").
+2. Compound Name: Each compound mentioned in an article usually has its own abbreviated Name, which is often an abbreviation of its full name (for example, ""EDTA"", ""HBED"", ""H3THP-Mal"").
+3. SMILES Type: In the article, the composition of the organometallic complex can be depicted in two ways. The first option ""environment"" means that the composition of the organometallic complex is depicted by illustrating the whole organometallic complex, i.e. it includes the structures of one or more ligands and a metal atom (Ga, Gd, Tc, Lu). The second option ""ligand"" means that the composition of the organometallic complex is depicted by illustrating a single chelate ligand, which is an organic molecule.
+4. SMILES: There can be two variants of how the organometallic complex (""environment"") and/or chelate ligand (""ligand"") is depicted in the article. The first one is when a molecular structure is depicted fully in a figure. The second variant is when one figure shows a molecule scaffold and other figures (or tables) show residues that can be attached to the scaffold. Each figure refers to a certain compound by its ID or Name. You should identify figures that contain structures of organometallic complex and/or chelate ligand, match scaffolds and residues if applicable, and extract all ligand stuctures of the organometallic complex without specifying the metal (e.g., ""COc1cc(C=CC([O-])CC([O-])CC([O-])C=Cc2ccc(O)c(OC)c2)ccc1O. [C-]#[O+].[C-]#[O+].[C-]#[O+].[OH-]"") or a chelate ligand (e.g., 'O=C(O)CN(CCN(CC(CC(=O)O)CC(=O)O)CCN(CC(=O)O)CC(=O)O') as SMILES representations. You should not take in account the chirality of molecules.
+5. LgK: Find references to the values of the logarithm of the thermodynamic stabilities of the organometallic complex (logK or lgK) in the article. You must extract the exact value of lgK.
+If the article references multiple samples or variations of compounds tested, ensure to extract and compile each unique set of 'Compound ID', 'Compound Name', 'SMILES Type', 'SMILES', and 'LgK' information. Make sure to maintain the association between each SMILES Type and its corresponding SMILES notation along with the specific LgK value it pertains to. 
+You need to extract all samples from each article except those that fall under the following conditions:
+1. The complexes must contain Tc as the metal or the ligands must belong to complexes of that metal
+2. No molecular structure of the organometallic complex or chelate ligand is given, only the name of the compound.
+3. The organometallic complex or chelate ligand does not contain carbon
+4 The molecular structure of the organometallic complex or chelate ligand must not have undefined radicals, undeciphered designations (e.g., amino acids) beyond the simplest abbreviations (i.e., Me, Et, Pr, Bu, Ph, Ac), names of radicals instead of their structure, or incomplete indication of the ligand structure (e.g., L = P, N)
+5. The organometallic complex or chelated ligand does not contain: polymeric structure, attached biomolecule, and carboranes
+6. The organometallic complex or chelate ligand is not reaction intermediates or precursors
+7. At least one ligand from the organometallic complex contains more than one carbon (exclude CO, Me)
+8. Images of the organometallic complex or chelate ligand contains errors in the figure/scheme captions
+Your output should be in JSON format  and should not contain any explanatory text. Here is the example:
+```json
+[
+{
+'Compound ID': 'L3',
+'Compound Name': 'DOTA',
+'SMILES Type': 'ligand',
+'SMILES': 'O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O',
+'LgK': '21.3'
+},
+{
+'Compound ID': 'A31',
+'Compound Name': 'tebroxime',
+'SMILES Type': 'environment',
+'SMILES': '[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC',
+'LgK': '17.9'
+}
+]
+```
+Do not skip any entries. If multiple LgK are reported for the same organometallic complex and/or chelate ligand, list them as separate entries. It is imperative that you should not make up any additional information or take the information you already know. If you did not find the parameter in the text, write 'NaN'.","{""samples"":[{""Compound ID"":""NaN"",""Compound Name"":""NaN"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)C(N)CC(=O)O"",""LgK"":""NaN""},{""Compound ID"":""NaN"",""Compound Name"":""NaN"",""SMILES Type"":""environment"",""SMILES"":""O=C(O)C(N)CC(=O)O.O=C(O)C(N)CC(=O)O"",""LgK"":""NaN""},{""Compound ID"":""NaN"",""Compound Name"":""NaN"",""SMILES Type"":""environment"",""SMILES"":""OC(=O)C1=CC=CC=C1OC2=CC=CC=C2OC(=O)C(N)Cc3ccc(O)c(OC)c3"",""LgK"":""NaN""},{""Compound ID"":""NaN"",""Compound Name"":""NaN"",""SMILES Type"":""ligand"",""SMILES"":""OC(=O)C1=CC=CC=C1OC2=CC=CC=C2OC(=O)C(N)C"",""LgK"":""NaN""},{""Compound ID"":""NaN"",""Compound Name"":""NaN"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)C1=CC(=CC=C1)OCC(=O)N2CC(=O)CC3=CC=C(O)C=C3OCC(=O)N2CC(=O)O"",""LgK"":""NaN""},{""Compound ID"":""NaN"",""Compound Name"":""NaN"",""SMILES Type"":""environment"",""SMILES"":""O=C(O)C1=CC=CC=C1OC(=O)N2C(=O)C3=CC=C(O)C=C3OC(=O)N2C"",""LgK"":""NaN""}]}"
+uzal2022.pdf,You are a PDF retrieval assistant.,"You are a helpful assistant in the field of chemistry, specializing in organometallic complexes.","Your task is to efficiently analyze the content of the provided article PDF and extract information about **ALL** structures of organometallic complexes and/or chelate ligands, except for the structure extraction constraints noted below. Typically, articles contain several experiments with organometallic complexes and/or chelate ligands with or without measured logarithms of thermodynamic stability constants (lgK). For each organometallic complex and/or chelate ligand, extract the following information: 
+1. Compound ID: Each compound mentioned in an article usually has its own ID (for example, ""L1"", ""A12"", ""35"").
+2. Compound Name: Each compound mentioned in an article usually has its own abbreviated Name, which is often an abbreviation of its full name (for example, ""EDTA"", ""HBED"", ""H3THP-Mal"").
+3. SMILES Type: In the article, the composition of the organometallic complex can be depicted in two ways. The first option ""environment"" means that the composition of the organometallic complex is depicted by illustrating the whole organometallic complex, i.e. it includes the structures of one or more ligands and a metal atom (Ga, Gd, Tc, Lu). The second option ""ligand"" means that the composition of the organometallic complex is depicted by illustrating a single chelate ligand, which is an organic molecule.
+4. SMILES: There can be two variants of how the organometallic complex (""environment"") and/or chelate ligand (""ligand"") is depicted in the article. The first one is when a molecular structure is depicted fully in a figure. The second variant is when one figure shows a molecule scaffold and other figures (or tables) show residues that can be attached to the scaffold. Each figure refers to a certain compound by its ID or Name. You should identify figures that contain structures of organometallic complex and/or chelate ligand, match scaffolds and residues if applicable, and extract all ligand stuctures of the organometallic complex without specifying the metal (e.g., ""COc1cc(C=CC([O-])CC([O-])CC([O-])C=Cc2ccc(O)c(OC)c2)ccc1O. [C-]#[O+].[C-]#[O+].[C-]#[O+].[OH-]"") or a chelate ligand (e.g., 'O=C(O)CN(CCN(CC(CC(=O)O)CC(=O)O)CCN(CC(=O)O)CC(=O)O') as SMILES representations. You should not take in account the chirality of molecules.
+5. LgK: Find references to the values of the logarithm of the thermodynamic stabilities of the organometallic complex (logK or lgK) in the article. You must extract the exact value of lgK.
+If the article references multiple samples or variations of compounds tested, ensure to extract and compile each unique set of 'Compound ID', 'Compound Name', 'SMILES Type', 'SMILES', and 'LgK' information. Make sure to maintain the association between each SMILES Type and its corresponding SMILES notation along with the specific LgK value it pertains to. 
+You need to extract all samples from each article except those that fall under the following conditions:
+1. The complexes must contain Gd as the metal or the ligands must belong to complexes of that metal
+2. No molecular structure of the organometallic complex or chelate ligand is given, only the name of the compound.
+3. The organometallic complex or chelate ligand does not contain carbon
+4 The molecular structure of the organometallic complex or chelate ligand must not have undefined radicals, undeciphered designations (e.g., amino acids) beyond the simplest abbreviations (i.e., Me, Et, Pr, Bu, Ph, Ac), names of radicals instead of their structure, or incomplete indication of the ligand structure (e.g., L = P, N)
+5. The organometallic complex or chelated ligand does not contain: polymeric structure, attached biomolecule, and carboranes
+6. The organometallic complex or chelate ligand is not reaction intermediates or precursors
+7. At least one ligand from the organometallic complex contains more than one carbon (exclude CO, Me)
+8. Images of the organometallic complex or chelate ligand contains errors in the figure/scheme captions
+Your output should be in JSON format  and should not contain any explanatory text. Here is the example:
+```json
+[
+{
+'Compound ID': 'L3',
+'Compound Name': 'DOTA',
+'SMILES Type': 'ligand',
+'SMILES': 'O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O',
+'LgK': '21.3'
+},
+{
+'Compound ID': 'A31',
+'Compound Name': 'tebroxime',
+'SMILES Type': 'environment',
+'SMILES': '[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC',
+'LgK': '17.9'
+}
+]
+```
+Do not skip any entries. If multiple LgK are reported for the same organometallic complex and/or chelate ligand, list them as separate entries. It is imperative that you should not make up any additional information or take the information you already know. If you did not find the parameter in the text, write 'NaN'.","{""samples"":[{""Compound ID"":""A56"",""Compound Name"":""H4CDTA"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)CNCC(O)C(=O)NCC(O)C(=O)O"",""LgK"":""NaN""},{""Compound ID"":""A1"",""Compound Name"":""H5DTPA"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",""LgK"":""NaN""},{""Compound ID"":""A19"",""Compound Name"":""H3DTPA-BMA"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)CN(CC)(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",""LgK"":""NaN""},{""Compound ID"":""A42"",""Compound Name"":""H6TTHA"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",""LgK"":""NaN""},{""Compound ID"":""B5"",""Compound Name"":""DOTAM"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",""LgK"":""13.12""},{""Compound ID"":""B9"",""Compound Name"":""H8DOTP"",""SMILES Type"":""ligand"",""SMILES"":""O=P(O)([O-])OCN(CCN(CC(OP(=O)(O)[O-])CC(=O)O)CC(=O)O)CC(=O)O"",""LgK"":""28.8""},{""Compound ID"":""C1"",""Compound Name"":""H3NOTA"",""SMILES Type"":""ligand"",""SMILES"":""O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O"",""LgK"":""13.7""}]}"
+wadas2010.pdf,You are a PDF retrieval assistant.,"You are a helpful assistant in the field of chemistry, specializing in organometallic complexes.","Your task is to efficiently analyze the content of the provided article PDF and extract information about **ALL** structures of organometallic complexes and/or chelate ligands, except for the structure extraction constraints noted below. Typically, articles contain several experiments with organometallic complexes and/or chelate ligands with or without measured logarithms of thermodynamic stability constants (lgK). For each organometallic complex and/or chelate ligand, extract the following information: 
+1. Compound ID: Each compound mentioned in an article usually has its own ID (for example, ""L1"", ""A12"", ""35"").
+2. Compound Name: Each compound mentioned in an article usually has its own abbreviated Name, which is often an abbreviation of its full name (for example, ""EDTA"", ""HBED"", ""H3THP-Mal"").
+3. SMILES Type: In the article, the composition of the organometallic complex can be depicted in two ways. The first option ""environment"" means that the composition of the organometallic complex is depicted by illustrating the whole organometallic complex, i.e. it includes the structures of one or more ligands and a metal atom (Ga, Gd, Tc, Lu). The second option ""ligand"" means that the composition of the organometallic complex is depicted by illustrating a single chelate ligand, which is an organic molecule.
+4. SMILES: There can be two variants of how the organometallic complex (""environment"") and/or chelate ligand (""ligand"") is depicted in the article. The first one is when a molecular structure is depicted fully in a figure. The second variant is when one figure shows a molecule scaffold and other figures (or tables) show residues that can be attached to the scaffold. Each figure refers to a certain compound by its ID or Name. You should identify figures that contain structures of organometallic complex and/or chelate ligand, match scaffolds and residues if applicable, and extract all ligand stuctures of the organometallic complex without specifying the metal (e.g., ""COc1cc(C=CC([O-])CC([O-])CC([O-])C=Cc2ccc(O)c(OC)c2)ccc1O. [C-]#[O+].[C-]#[O+].[C-]#[O+].[OH-]"") or a chelate ligand (e.g., 'O=C(O)CN(CCN(CC(CC(=O)O)CC(=O)O)CCN(CC(=O)O)CC(=O)O') as SMILES representations. You should not take in account the chirality of molecules.
+5. LgK: Find references to the values of the logarithm of the thermodynamic stabilities of the organometallic complex (logK or lgK) in the article. You must extract the exact value of lgK.
+If the article references multiple samples or variations of compounds tested, ensure to extract and compile each unique set of 'Compound ID', 'Compound Name', 'SMILES Type', 'SMILES', and 'LgK' information. Make sure to maintain the association between each SMILES Type and its corresponding SMILES notation along with the specific LgK value it pertains to. 
+You need to extract all samples from each article except those that fall under the following conditions:
+1. The complexes must contain Ga as the metal or the ligands must belong to complexes of that metal
+2. No molecular structure of the organometallic complex or chelate ligand is given, only the name of the compound.
+3. The organometallic complex or chelate ligand does not contain carbon
+4 The molecular structure of the organometallic complex or chelate ligand must not have undefined radicals, undeciphered designations (e.g., amino acids) beyond the simplest abbreviations (i.e., Me, Et, Pr, Bu, Ph, Ac), names of radicals instead of their structure, or incomplete indication of the ligand structure (e.g., L = P, N)
+5. The organometallic complex or chelated ligand does not contain: polymeric structure, attached biomolecule, and carboranes
+6. The organometallic complex or chelate ligand is not reaction intermediates or precursors
+7. At least one ligand from the organometallic complex contains more than one carbon (exclude CO, Me)
+8. Images of the organometallic complex or chelate ligand contains errors in the figure/scheme captions
+Your output should be in JSON format  and should not contain any explanatory text. Here is the example:
+```json
+[
+{
+'Compound ID': 'L3',
+'Compound Name': 'DOTA',
+'SMILES Type': 'ligand',
+'SMILES': 'O=C(O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O',
+'LgK': '21.3'
+},
+{
+'Compound ID': 'A31',
+'Compound Name': 'tebroxime',
+'SMILES Type': 'environment',
+'SMILES': '[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC.[C-]#[N+]CC(C)(C)OC',
+'LgK': '17.9'
+}
+]
+```
+Do not skip any entries. If multiple LgK are reported for the same organometallic complex and/or chelate ligand, list them as separate entries. It is imperative that you should not make up any additional information or take the information you already know. If you did not find the parameter in the text, write 'NaN'.","{""samples"":[{""Compound ID"":""L15"",""Compound Name"":""SBAD"",""SMILES Type"":""ligand"",""SMILES"":""NCCN(C)C1=CC(C=CC(O)=O)=C(OC)C(O)=C1"",""LgK"":""24.5""},{""Compound ID"":""L16"",""Compound Name"":""BAPEN"",""SMILES Type"":""ligand"",""SMILES"":""NCCN(CC1=CC(O)=CC=C1)C2=CC(=CC(O)=C2)CCN"",""LgK"":""23.9""},{""Compound ID"":""L20"",""Compound Name"":""DiP-LICAM"",""SMILES Type"":""ligand"",""SMILES"":""CCN(CCN(CC(CC(=O)O)CC(=O)O)CCN(CC(=O)O)CC(=O)O)CC1=CC(=CC C=1)N"",""LgK"":""38.6""},{""Compound ID"":""L21"",""Compound Name"":""L21"",""SMILES Type"":""ligand"",""SMILES"":""OC(CN1CCCC1)C2=CC=CC=C2"",""LgK"":""25.6""}]}"

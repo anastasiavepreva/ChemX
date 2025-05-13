@@ -1,0 +1,118 @@
+site_name: ChemX
+site_url: https://ai-chem.github.io/ChemX/
+repo_url: https://github.com/ai-chem/ChemX/
+edit_uri: blob/main/docs/
+
+extra_css:
+  - stylesheets/extra.css
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
+  features:
+    - content.action.edit
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - navigation.footer
+    - navigation.path
+    - navigation.tracking
+    - navigation.sections
+    - navigation.indexes
+    - navigation.collapse
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - search.share
+    - header.autohide
+    - toc.follow
+  palette:
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Dark mode
+      primary: custom
+      accent: custom
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Light mode
+      primary: custom
+      accent: custom
+
+nav:
+  - Home: index.md
+  - Overview:
+      - Project Motivation: overview/project_motivation.md
+      - Datasets description: overview/datasets_description.md
+  - Methods:
+      - Approach: methods/approach.md
+      - Data extraction: methods/data_extraction.md
+      - Extraction Prompts: methods/extraction_prompts.md
+      - Data validation: methods/data_validation.md
+      - Benchmarking: methods/benchmarking.md
+  - Datasets:
+      - Nanomaterials:
+          - Cytotox: datasets/dataset_1.md
+          - SelTox: datasets/dataset_2.md
+          - Synergy: datasets/dataset_3.md
+          - Nanozymes: datasets/dataset_4.md
+          - Nanomag: datasets/dataset_11.md
+      - Small Molecules:
+          - Benzimidazoles: datasets/dataset_5.md
+          - Oxazolidinones: datasets/dataset_6.md
+          - Complexes: datasets/dataset_7.md
+          - Eye Drops: datasets/dataset_8.md
+          - Co-crystals: datasets/dataset_9.md
+  - Tutorial: tutorial.md
+  - About:
+      - Team: about/team.md
+      - License: about/license.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+      toc_depth: 2
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.snippets
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format ""
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - autorefs
+  - offline
+
+copyright: Copyright &copy; 2025 Center for AI in Chemistry, ITMO University
