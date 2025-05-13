@@ -5,14 +5,14 @@ from tqdm import tqdm
 
 from constants import DATASETS, MAGNETIC_ARTICLES, SELTOX_ARTICLES
 
-def get_parameters():
+def get_parameters() -> argparse.Namespace:
     """Parses and returns command-line arguments for dataset selection and Poppler path."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=DATASETS, required=True)
     parser.add_argument('--poppler_path', type=str, required=True)
     return parser.parse_args()
 
-def main():
+def main() -> None:
     """
     Converts open-access PDF articles from a specified dataset into images, saving each page as a JPEG.
 

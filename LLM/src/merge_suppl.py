@@ -4,13 +4,13 @@ from tqdm import tqdm
 
 from constants import DATASETS
 
-def get_parameters():
+def get_parameters() -> argparse.Namespace:
     """Parses and returns a command-line argument for dataset selection."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=DATASETS, required=True)
     return parser.parse_args()
 
-def main():
+def main() -> None:
     """
     Merges supplementary PDF files with their corresponding articles in the specified dataset.
 

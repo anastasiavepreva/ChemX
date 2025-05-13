@@ -6,14 +6,14 @@ import argparse, os, json
 
 from constants import DATASETS
 
-def get_parameters():
+def get_parameters() -> argparse.Namespace:
     """Parses and returns command-line arguments for dataset selection and OpenAI API key."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=DATASETS, required=True)
     parser.add_argument('--openai_api_key', type=str, required=True)
     return parser.parse_args()
 
-def get_query(dataset):
+def get_query(dataset: str) -> tuple[str, str]:
     """Retrieves prompt components for a specified dataset."""
     df_promt = pd.read_csv('data/prompts.csv')
     description = df_promt['description'][df_promt['dataset'] == dataset].item()
@@ -22,7 +22,7 @@ def get_query(dataset):
     instruction_prompt = df_promt['prompt'][df_promt['dataset'] == dataset].item()
     return system_prompt, instruction_prompt
 
-def get_query_by_condition(dataset, condition):
+def get_query_by_condition(dataset: str, condition: str) -> tuple[str, str]:
     """Retrieves prompt components for a specified dataset by condition (for 'complexes' dataset)."""
     df_promt = pd.read_csv('data/prompts.csv')
     description = df_promt['description'][(df_promt['dataset'] == dataset) & (df_promt['condition'] == condition)].item()
@@ -31,7 +31,7 @@ def get_query_by_condition(dataset, condition):
     instruction_prompt = df_promt['prompt'][(df_promt['dataset'] == dataset) & (df_promt['condition'] == condition)].item()
     return system_prompt, instruction_prompt
 
-def main():
+def main() -> None:
     """
     Main entry point for information extraction from images using OpenAI's GPT-4o model.
 

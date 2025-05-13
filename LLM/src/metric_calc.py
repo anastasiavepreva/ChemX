@@ -10,18 +10,18 @@ RDLogger.DisableLog('rdApp.*')
 
 from constants import DATASETS, EXTRACTED_COLUMNS, NUMERIC_COLUMNS, SMILES_COLS
 
-def convert_comma(x):
+def convert_comma(x: str) -> str:
     """Converts commas to periods in a string, if possible."""
     try:
         return str(x.replace(',', '.'))
     except:
         return str(x)
     
-def select_open_access(df_dataset):
+def select_open_access(df_dataset: pd.DataFrame) -> pd.DataFrame:
     """Filters and returns the rows with open access (access == 1) articles in the dataset."""
     return df_dataset.loc[df_dataset['access'] == 1]
 
-def prepare_dataset(dataset, n_cols, s_cols):
+def prepare_dataset(dataset: str, n_cols: list[str], s_cols: list[str]) -> pd.DataFrame:
     """Prepares the dataset by cleaning, converting columns, and processing open-access rows."""
     df_dataset = pd.read_csv(f'data/datasets/{dataset}.csv')
     
@@ -39,7 +39,12 @@ def prepare_dataset(dataset, n_cols, s_cols):
 
     return select_open_access(df_dataset)
 
-def prepare_result(dataset, source, cols, s_cols):
+def prepare_result(
+    dataset: str,
+    source: str,
+    cols: list[str],
+    s_cols: list[str]
+    ) -> pd.DataFrame:
     """Processes the results from PDF, image, or single-agent source, and formats them into a DataFrame."""
     if source == 'pdf':
         df_output = pd.read_csv(f'result/from_pdf/{dataset}_result.csv')
@@ -74,7 +79,7 @@ def prepare_result(dataset, source, cols, s_cols):
 
     return df_result.drop_duplicates()
 
-def empty_metrics(cols):
+def empty_metrics(cols: list[str]) -> pd.DataFrame:
     """Creates an empty DataFrame to store metrics (tp, fp, fn, precision, recall, f1) for specified columns."""
     metrics = dict()
     for col in cols:
@@ -83,7 +88,8 @@ def empty_metrics(cols):
 
 def calc_metrics(
     df_true: pd.DataFrame,
-    df_pred: pd.DataFrame) -> pd.DataFrame:
+    df_pred: pd.DataFrame
+    ) -> pd.DataFrame:
 
     """Calculates precision, recall, F1 score, and confusion matrix metrics for each column in the true and predicted DataFrames."""
 
@@ -140,14 +146,14 @@ def calc_metrics(
 
     return pd.DataFrame(metrics).T
 
-def get_parameters():
+def get_parameters() -> argparse.Namespace:
     """Parses and returns command-line arguments for dataset selection and extraction approach identification."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=DATASETS, required=True)
     parser.add_argument('--source', type=str, choices=['image', 'pdf', 'single_agent'], required=True)
     return parser.parse_args()
 
-def main():
+def main() -> None:
     """
     Analyzes the performance of predictions by calculating evaluation metrics (precision, recall, F1 score) for a specified dataset.
 
