@@ -3,16 +3,17 @@ import argparse, os, os.path
 import pandas as pd
 from tqdm import tqdm
 import json
-import numpy as np
 
 from openai import OpenAI
 from openai.types.beta.threads.message_create_params import Attachment, AttachmentToolFileSearch
 
+from constants import datasets, magnetic_articles, seltox_articles
+
 def get_parameters():
     """Parses and returns command-line arguments for dataset selection and OpenAI API key."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--openai_api_key', type=str)
-    parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
+    parser.add_argument('--openai_api_key', type=str, required=True)
+    parser.add_argument('--dataset', type=str, choices=datasets, required=True)
     return parser.parse_args()
 
 def get_query(dataset):
@@ -68,8 +69,11 @@ def main():
         access_files = set(df_dataset['pdf'][df_dataset['access'] == 1])
     elif dataset in ['cocrystals']: # select name of pdf without suppl
         access_files = set(df_dataset['pdf'].apply(lambda x: x.split(',')[0] + '.pdf')[df_dataset['access'] == 1])
-    elif dataset in ['magnetic', 'seltox']: # too many open access pdfs, working with half of them
-        access_files = set(np.load(f'src/{dataset}_articles.npy'))
+    elif dataset == 'magnetic': # too many open access pdfs, working with half of them
+        access_files = magnetic_articles
+        print(access_files, len(access_files))
+    elif dataset == 'seltox': # too many open access pdfs, working with half of them
+        access_files = seltox_articles
         print(access_files, len(access_files))
     else:
         sys.exit('No code for this!')

@@ -2,12 +2,13 @@ from pdf2image import convert_from_path
 import os, argparse, sys
 import pandas as pd
 from tqdm import tqdm
-import numpy as np
+
+from constants import datasets, magnetic_articles, seltox_articles
 
 def get_parameters():
     """Parses and returns command-line arguments for dataset selection and Poppler path."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
+    parser.add_argument('--dataset', type=str, choices=datasets)
     parser.add_argument('--poppler_path', type=str)
     return parser.parse_args()
 
@@ -37,9 +38,9 @@ def main():
     df_dataset['pdf'] = df_dataset['pdf'].apply(lambda x: x + '.pdf' if x.endswith('.pdf') == False else x)
     all_oa_pdfs = df_dataset[df_dataset.access == 1].pdf.tolist()
     if dataset == 'magnetic':
-        access_files = np.load('src/magnetic_articles.npy')
+        access_files = magnetic_articles
     elif dataset == 'seltox':
-        access_files = np.load('src/seltox_articles.npy')
+        access_files = seltox_articles
     else:
         access_files = set(all_oa_pdfs)
     

@@ -2,10 +2,12 @@ from pypdf import PdfWriter
 import argparse, os
 from tqdm import tqdm
 
+from constants import datasets
+
 def get_parameters():
     """Parses and returns a command-line argument for dataset selection."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
+    parser.add_argument('--dataset', type=str, choices=datasets)
     return parser.parse_args()
 
 def main():
