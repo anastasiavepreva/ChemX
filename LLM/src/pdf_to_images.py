@@ -3,13 +3,13 @@ import os, argparse, sys
 import pandas as pd
 from tqdm import tqdm
 
-from constants import datasets, magnetic_articles, seltox_articles
+from constants import DATASETS, MAGNETIC_ARTICLES, SELTOX_ARTICLES
 
 def get_parameters():
     """Parses and returns command-line arguments for dataset selection and Poppler path."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--dataset', type=str, choices=datasets)
-    parser.add_argument('--poppler_path', type=str)
+    parser.add_argument('--dataset', type=str, choices=DATASETS, required=True)
+    parser.add_argument('--poppler_path', type=str, required=True)
     return parser.parse_args()
 
 def main():
@@ -38,9 +38,9 @@ def main():
     df_dataset['pdf'] = df_dataset['pdf'].apply(lambda x: x + '.pdf' if x.endswith('.pdf') == False else x)
     all_oa_pdfs = df_dataset[df_dataset.access == 1].pdf.tolist()
     if dataset == 'magnetic':
-        access_files = magnetic_articles
+        access_files = MAGNETIC_ARTICLES
     elif dataset == 'seltox':
-        access_files = seltox_articles
+        access_files = SELTOX_ARTICLES
     else:
         access_files = set(all_oa_pdfs)
     

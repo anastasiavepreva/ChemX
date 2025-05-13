@@ -4,12 +4,12 @@ import pandas as pd
 from tqdm import tqdm
 import argparse, os, json
 
-from constants import datasets
+from constants import DATASETS
 
 def get_parameters():
     """Parses and returns command-line arguments for dataset selection and OpenAI API key."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--dataset', type=str, choices=datasets, required=True)
+    parser.add_argument('--dataset', type=str, choices=DATASETS, required=True)
     parser.add_argument('--openai_api_key', type=str, required=True)
     return parser.parse_args()
 

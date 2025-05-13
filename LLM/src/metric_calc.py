@@ -8,7 +8,7 @@ from rdkit import Chem
 from rdkit import RDLogger 
 RDLogger.DisableLog('rdApp.*')
 
-from constants import datasets, EXTRACTED_COLUMNS, NUMERIC_COLUMNS, SMILES_COLS
+from constants import DATASETS, EXTRACTED_COLUMNS, NUMERIC_COLUMNS, SMILES_COLS
 
 def convert_comma(x):
     """Converts commas to periods in a string, if possible."""
@@ -143,7 +143,7 @@ def calc_metrics(
 def get_parameters():
     """Parses and returns command-line arguments for dataset selection and extraction approach identification."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--dataset', type=str, choices=datasets, required=True)
+    parser.add_argument('--dataset', type=str, choices=DATASETS, required=True)
     parser.add_argument('--source', type=str, choices=['image', 'pdf', 'single_agent'], required=True)
     return parser.parse_args()
 

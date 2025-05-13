@@ -1,7 +1,7 @@
 # DATASETS
-datasets = ['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy']
+DATASETS = ['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy']
 
-# EXTRACTION COLUMNS
+# EXTRACTION
 EXTRACTED_COLUMNS = {
     'oxazolidinone': ['compound_id', 'smiles', 'target_type', 'target_relation', 'target_value', 'target_units', 'bacteria'],
     'benzimidazole': ['compound_id', 'smiles', 'target_type', 'target_relation', 'target_value', 'target_units', 'bacteria'],
@@ -39,7 +39,7 @@ SMILES_COLS = {
 }
 
 # ARTICLES
-magnetic_articles = ['j.msec.2009.09.003.pdf', 'd0na00820f.pdf', '1.2739217.pdf',
+MAGNETIC_ARTICLES = ['j.msec.2009.09.003.pdf', 'd0na00820f.pdf', '1.2739217.pdf',
        'nn305991e.pdf', 'nano12183159.pdf', 'd2ra04454d.pdf',
        'nano12173023.pdf', 'nano7120415.pdf',
        'j.colsurfa.2023.132281.pdf', 's41598-018-19676-5.pdf',
@@ -62,7 +62,7 @@ magnetic_articles = ['j.msec.2009.09.003.pdf', 'd0na00820f.pdf', '1.2739217.pdf'
        'nano12193304.pdf', 'acsomega.8b03004.pdf', 'ab7e6e.pdf',
        's40580-014-0032-4.pdf']
 
-seltox_articles = ['156_1-s2.0-S294982952400024X-main.pdf',
+SELTOX_ARTICLES = ['156_1-s2.0-S294982952400024X-main.pdf',
        '145_1-s2.0-S187853522200079X-main.pdf',
        '176_1-s2.0-S1350417724001718-main.pdf',
        '198_1-s2.0-S2590207524000170-main.pdf',
