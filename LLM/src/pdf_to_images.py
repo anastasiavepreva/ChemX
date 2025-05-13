@@ -4,15 +4,26 @@ import pandas as pd
 from tqdm import tqdm
 import numpy as np
 
-def parameter():
+def get_parameters():
+    """Parses and returns command-line arguments for dataset selection and Poppler path."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
     parser.add_argument('--poppler_path', type=str)
     return parser.parse_args()
 
 def main():
-    
-    args = vars(parameter())
+    """
+    Converts open-access PDF articles from a specified dataset into images, saving each page as a JPEG.
+
+    This function:
+        - Parses command-line arguments to get the dataset name and Poppler path for PDF processing.
+        - Loads the dataset metadata and determines which PDF files are open access.
+        - Validates the presence of required PDF files in the expected directories.
+        - For datasets with supplementary material, prioritizes merged PDFs when available.
+        - Creates dedicated folders for each PDF.
+        - Converts each page of each PDF into a JPEG image and saves the images into the corresponding folder.
+    """
+    args = vars(get_parameters())
     dataset = args['dataset']
     df_dataset = pd.read_csv(f'data/datasets/{dataset}.csv')
     
@@ -55,6 +66,11 @@ def main():
         os.path.join(folder_path, filename)
         for filename in access_files
         ]
+
+    # create images folder
+    images_path = 'data/images'
+    if not os.path.exists(images_path):
+        os.makedirs(images_path)
 
     # create folders for each pdf
     folder_paths = [os.path.join(os.path.normpath(f'data/images/{dataset}'), i.split('\\')[-1].replace('.pdf', '')) for i in pdf_paths]

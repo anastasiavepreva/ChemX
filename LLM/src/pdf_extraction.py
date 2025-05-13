@@ -3,28 +3,28 @@ import argparse, os, os.path
 import pandas as pd
 from tqdm import tqdm
 import json
-import random
 import numpy as np
 
 from openai import OpenAI
 from openai.types.beta.threads.message_create_params import Attachment, AttachmentToolFileSearch
 
-from pypdf import PdfWriter
-
-def parameter():
+def get_parameters():
+    """Parses and returns command-line arguments for dataset selection and OpenAI API key."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--openai_api_key', type=str)
     parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
     return parser.parse_args()
 
-def get_querry(dataset):
+def get_query(dataset):
+    """Retrieves prompt components for a specified dataset."""
     df_promt = pd.read_csv('data/prompts.csv')
     description = df_promt['description'][df_promt['dataset'] == dataset].item()
     instructions = df_promt['instructions'][df_promt['dataset'] == dataset].item()
     prompt = df_promt['prompt'][df_promt['dataset'] == dataset].item()
     return description, instructions, prompt
 
-def get_querry_by_condition(dataset, condition):
+def get_query_by_condition(dataset, condition):
+    """Retrieves prompt components for a specified dataset by condition (for 'complexes' dataset)."""
     df_promt = pd.read_csv('data/prompts.csv')
     description = df_promt['description'][(df_promt['dataset'] == dataset) & (df_promt['condition'] == condition)].item()
     instructions = df_promt['instructions'][(df_promt['dataset'] == dataset) & (df_promt['condition'] == condition)].item()
@@ -32,7 +32,18 @@ def get_querry_by_condition(dataset, condition):
     return description, instructions, prompt
 
 def main():
-    args = vars(parameter())
+    """
+    Main entry point for information extraction from PDF documents using OpenAI's GPT-4o model.
+
+    This function:
+        - Parses command-line arguments to retrieve the dataset name and OpenAI API key.
+        - Loads a list of open-access PDF files associated with the dataset.
+        - Checks the presence of these PDFs in the appropriate folders.
+        - For each PDF, constructs dataset-specific prompts.
+        - Uses OpenAI's Assistants API to upload the PDF file, send a prompt, generate a structured response using a predefined JSON schema.
+        - Collects the output into a DataFrame and saves it as a CSV file.
+    """
+    args = vars(get_parameters())
     api_key = args['openai_api_key']
     dataset = args['dataset']
     
@@ -46,7 +57,7 @@ def main():
         pdf_files.extend(os.listdir(path_to_merged_pdfs))
     # promt
     if dataset != 'complexes':
-        description, instructions, prompt = get_querry(dataset)
+        description, instructions, prompt = get_query(dataset)
     # dataset
     df_dataset = pd.read_csv(f'data/datasets/{dataset}.csv')
 
@@ -82,7 +93,7 @@ def main():
     for pdf in tqdm(access_files):
         
         if dataset == 'complexes':
-            description, instructions, prompt = get_querry_by_condition(dataset, df_dataset['metal'][df_dataset['pdf'] == pdf[:-4]].iloc[0])
+            description, instructions, prompt = get_query_by_condition(dataset, df_dataset['metal'][df_dataset['pdf'] == pdf[:-4]].iloc[0])
         
         path = path_to_merged_pdfs + pdf
         if os.path.isfile(path) == False:

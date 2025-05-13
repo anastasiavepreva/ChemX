@@ -4,13 +4,15 @@ import pandas as pd
 from tqdm import tqdm
 import argparse, os, json
 
-def parameter():
+def get_parameters():
+    """Parses and returns command-line arguments for dataset selection and OpenAI API key."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
     parser.add_argument('--openai_api_key', type=str)
     return parser.parse_args()
 
-def get_querry(dataset):
+def get_query(dataset):
+    """Retrieves prompt components for a specified dataset."""
     df_promt = pd.read_csv('data/prompts.csv')
     description = df_promt['description'][df_promt['dataset'] == dataset].item()
     instructions = df_promt['instructions'][df_promt['dataset'] == dataset].item()
@@ -18,7 +20,8 @@ def get_querry(dataset):
     instruction_prompt = df_promt['prompt'][df_promt['dataset'] == dataset].item()
     return system_prompt, instruction_prompt
 
-def get_querry_by_condition(dataset, condition):
+def get_query_by_condition(dataset, condition):
+    """Retrieves prompt components for a specified dataset by condition (for 'complexes' dataset)."""
     df_promt = pd.read_csv('data/prompts.csv')
     description = df_promt['description'][(df_promt['dataset'] == dataset) & (df_promt['condition'] == condition)].item()
     instructions = df_promt['instructions'][(df_promt['dataset'] == dataset) & (df_promt['condition'] == condition)].item()
@@ -27,8 +30,19 @@ def get_querry_by_condition(dataset, condition):
     return system_prompt, instruction_prompt
 
 def main():
-    
-    args = vars(parameter())
+    """
+    Main entry point for information extraction from images using OpenAI's GPT-4o model.
+
+    This function:
+        - Parses command-line arguments to retrieve the dataset name and OpenAI API key.
+        - Loads images from the specified dataset folder.
+        - Constructs prompts based on dataset-specific information.
+        - Encodes image files as base64 and embeds them in the model's input message.
+        - Sends the constructed prompt and image data to the GPT-4o model using OpenAI's API,
+          expecting structured JSON responses.
+        - Aggregates the model responses into a DataFrame and exports the results to a TSV file.
+    """
+    args = vars(get_parameters())
     dataset = args['dataset']
     openai.api_key = args['openai_api_key']
     
@@ -37,7 +51,7 @@ def main():
     # prepare prompts
     df_dataset = pd.read_csv(f'data/datasets/{dataset}.csv')
     if dataset != 'complexes':
-        system_prompt, instruction_prompt = get_querry(dataset)        
+        system_prompt, instruction_prompt = get_query(dataset)        
     
     # load expected output json structure
     with open(f'data/json/{dataset}.json', 'r') as file:
@@ -54,7 +68,7 @@ def main():
     for folder in tqdm(folders):
         
         if dataset == 'complexes':
-            system_prompt, instruction_prompt = get_querry_by_condition(dataset, df_dataset['metal'][df_dataset['pdf'] == folder.split('\\')[-1]].iloc[0])
+            system_prompt, instruction_prompt = get_query_by_condition(dataset, df_dataset['metal'][df_dataset['pdf'] == folder.split('\\')[-1]].iloc[0])
         
         # go into folder and get all image paths
         image_paths = [os.path.join(folder, filename)
@@ -111,9 +125,7 @@ def main():
     df['prompt'] = system_prompt + instruction_prompt
     df['output'] = output
 
-    if not os.path.exists(f'result/from_image/{dataset}'):
-        os.makedirs(f'result/from_image/{dataset}')
-    df.to_csv(f'result/from_image/{dataset}/gpt_4o_results.csv', sep='\t', index=False)
+    df.to_csv(f'result/from_image/{dataset}_result.csv', sep='\t', index=False)
     
 if __name__ == "__main__":
     main()

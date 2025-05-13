@@ -45,15 +45,18 @@ SMILES_COLS = {
 }
 
 def convert_comma(x):
+    """Converts commas to periods in a string, if possible."""
     try:
         return str(x.replace(',', '.'))
     except:
         return str(x)
     
 def select_open_access(df_dataset):
+    """Filters and returns the rows with open access (access == 1) articles in the dataset."""
     return df_dataset.loc[df_dataset['access'] == 1]
 
 def prepare_dataset(dataset, n_cols, s_cols):
+    """Prepares the dataset by cleaning, converting columns, and processing open-access rows."""
     df_dataset = pd.read_csv(f'data/datasets/{dataset}.csv')
     
     for col in n_cols:
@@ -71,12 +74,13 @@ def prepare_dataset(dataset, n_cols, s_cols):
     return select_open_access(df_dataset)
 
 def prepare_result(dataset, source, cols, s_cols):
+    """Processes the results from PDF, image, or single-agent source, and formats them into a DataFrame."""
     if source == 'pdf':
-        df_output = pd.read_csv(f'result/from_pdf/{dataset}_result_2.csv')
+        df_output = pd.read_csv(f'result/from_pdf/{dataset}_result.csv')
     elif source == 'image':
-        df_output = pd.read_csv(f'result/from_image/{dataset}/gpt_4o_results_2.csv', sep='\t')
-    elif source == 'alexey':
-        df_result = pd.read_csv(f'result/from_alexey/{dataset}/pred.csv')
+        df_output = pd.read_csv(f'result/from_image/{dataset}_result.csv', sep='\t')
+    elif source == 'single_agent':
+        df_result = pd.read_csv(f'result/from_single_agent/{dataset}/pred.csv')
         if dataset in ['cytotoxicity', 'seltox', 'synergy', 'magnetic']:
             df_result['pdf'] = df_result['pdf'].apply(lambda x: x + '.pdf')
         return df_result.drop_duplicates()
@@ -105,6 +109,7 @@ def prepare_result(dataset, source, cols, s_cols):
     return df_result.drop_duplicates()
 
 def empty_metrics(cols):
+    """Creates an empty DataFrame to store metrics (tp, fp, fn, precision, recall, f1) for specified columns."""
     metrics = dict()
     for col in cols:
         metrics[col] = {"tp": 0, "fp": 0, "fn": 0, "precision": 0, "recall": 0, "f1": 0}
@@ -113,7 +118,9 @@ def empty_metrics(cols):
 def calc_metrics(
     df_true: pd.DataFrame,
     df_pred: pd.DataFrame) -> pd.DataFrame:
-   
+
+    """Calculates precision, recall, F1 score, and confusion matrix metrics for each column in the true and predicted DataFrames."""
+
     metrics = {}
     from copy import deepcopy
     for col in df_true.columns:
@@ -167,14 +174,26 @@ def calc_metrics(
 
     return pd.DataFrame(metrics).T
 
-def parameter():
+def get_parameters():
+    """Parses and returns command-line arguments for dataset selection and extraction approach identification."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
-    parser.add_argument('--source', type=str, choices=['image', 'pdf', 'alexey'])
+    parser.add_argument('--source', type=str, choices=['image', 'pdf', 'single_agent'])
     return parser.parse_args()
 
 def main():
-    args = vars(parameter())
+    """
+    Analyzes the performance of predictions by calculating evaluation metrics (precision, recall, F1 score) for a specified dataset.
+
+    This function:
+        - Loads command-line arguments to get the dataset name and data source.
+        - Prepares the dataset by cleaning and processing columns based on the dataset type.
+        - Prepares the results from a specified source (PDF, image, or single agent).
+        - Calculates metrics (precision, recall, F1 score) for each article by comparing the dataset values and results.
+        - Aggregates the metrics and averages them across all articles in the dataset.
+        - Saves the resulting metrics to a CSV file for further analysis.
+    """
+    args = vars(get_parameters())
     dataset = args['dataset']
     source = args['source']
     cols = EXTRACTED_COLUMNS[dataset]
@@ -203,7 +222,7 @@ def main():
     df_metrics = df_metrics / len(access_articles)
     print(df_metrics)
     
-    path_to_save = f'result/metrics/metrics_{dataset}_from_{source}_corr.csv'
+    path_to_save = f'result/metrics/metrics_{dataset}_from_{source}.csv'
     df_metrics.to_csv(path_to_save)
     
     print(f'Saved to {path_to_save}!')

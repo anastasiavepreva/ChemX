@@ -175,5 +175,5 @@ cython_debug/
 
 data/pdfs/*/*.pdf
 data/pdfs/*/*/*.pdf
-data/images/*/
+data/images/
 src/images_extraction_pipeline.py

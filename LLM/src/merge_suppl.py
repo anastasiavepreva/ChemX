@@ -2,13 +2,25 @@ from pypdf import PdfWriter
 import argparse, os
 from tqdm import tqdm
 
-def parameter():
+def get_parameters():
+    """Parses and returns a command-line argument for dataset selection."""
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--dataset', type=str, choices=['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy'])
     return parser.parse_args()
 
 def main():
-    args = vars(parameter())
+    """
+    Merges supplementary PDF files with their corresponding articles in the specified dataset.
+
+    This function:
+        - Parses command-line arguments to get the dataset name.
+        - Sets up paths to the folder containing PDFs and a new folder for merged PDFs.
+        - Iterates through all PDFs in the original dataset folder:
+            - Identifies supplementary PDF files (those ending with '_si.pdf' or '_SI.pdf').
+            - Attempts to merge each supplementary PDF with its corresponding article PDF (with matching names).
+        - The merged PDFs are saved in a new folder with the suffix '_merged' appended to the dataset name.
+    """
+    args = vars(get_parameters())
     dataset = args['dataset']
     
     path_to_pdfs = f'data/pdfs/pdf_{dataset}/'
