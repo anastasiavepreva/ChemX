@@ -1,6 +1,17 @@
 # DATASETS
 DATASETS = ['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy']
 
+# DATASETS_IDS
+DATASETS_IDS = {'oxazolidinone': 'ai-chem/Oxazolidinones', 
+                'benzimidazole': 'ai-chem/Benzimidazoles', 
+                'cocrystals': 'ai-chem/Co-crystals', 
+                'complexes': 'ai-chem/Complexes', 
+                'nanozymes': 'ai-chem/Nanozymes', 
+                'magnetic': 'ai-chem/Nanomag', 
+                'cytotoxicity': 'ai-chem/Cytotox', 
+                'seltox': 'ai-chem/SelTox', 
+                'synergy': 'ai-chem/Synergy'}
+
 # EXTRACTION
 EXTRACTED_COLUMNS = {
     'oxazolidinone': ['compound_id', 'smiles', 'target_type', 'target_relation', 'target_value', 'target_units', 'bacteria'],

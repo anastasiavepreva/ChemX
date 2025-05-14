@@ -4,11 +4,14 @@ import pandas as pd
 import argparse
 import numpy as np
 from rdkit import Chem
+from datasets import load_dataset
 
 from rdkit import RDLogger 
 RDLogger.DisableLog('rdApp.*')
 
-from constants import DATASETS, EXTRACTED_COLUMNS, NUMERIC_COLUMNS, SMILES_COLS
+from datasets import load_dataset
+
+from constants import DATASETS, DATASETS_IDS, EXTRACTED_COLUMNS, NUMERIC_COLUMNS, SMILES_COLS
 
 def convert_comma(x: str) -> str:
     """Converts commas to periods in a string, if possible."""
@@ -21,9 +24,10 @@ def select_open_access(df_dataset: pd.DataFrame) -> pd.DataFrame:
     """Filters and returns the rows with open access (access == 1) articles in the dataset."""
     return df_dataset.loc[df_dataset['access'] == 1]
 
-def prepare_dataset(dataset: str, n_cols: list[str], s_cols: list[str]) -> pd.DataFrame:
+def prepare_dataset(dataset: str, dataset_id: str, n_cols: list[str], s_cols: list[str]) -> pd.DataFrame:
     """Prepares the dataset by cleaning, converting columns, and processing open-access rows."""
-    df_dataset = pd.read_csv(f'data/datasets/{dataset}.csv')
+    dataset = load_dataset(dataset_id)
+    df_dataset = dataset["train"].to_pandas()
     
     for col in n_cols:
         df_dataset[col] = df_dataset[col].apply(lambda x: convert_comma(x))
@@ -168,11 +172,13 @@ def main() -> None:
     args = vars(get_parameters())
     dataset = args['dataset']
     source = args['source']
+
+    dataset_id = DATASETS_IDS[dataset]
     cols = EXTRACTED_COLUMNS[dataset]
     n_cols = NUMERIC_COLUMNS[dataset]
     s_cols = SMILES_COLS[dataset]
     
-    df_dataset = prepare_dataset(dataset, n_cols, s_cols)
+    df_dataset = prepare_dataset(dataset, dataset_id, n_cols, s_cols)
     df_result = prepare_result(dataset, source, cols, s_cols)
     df_dataset['pdf'] = df_dataset['pdf'].apply(lambda x: x.lower())
     df_result['pdf'] = df_result['pdf'].apply(lambda x: x.lower())
