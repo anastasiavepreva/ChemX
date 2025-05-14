@@ -1,4 +1,4 @@
-# DATASETS
+# DATASETS NAMES
 DATASETS = ['oxazolidinone', 'benzimidazole', 'cocrystals', 'complexes', 'nanozymes', 'magnetic', 'cytotoxicity', 'seltox', 'synergy']
 
 # DATASETS_IDS

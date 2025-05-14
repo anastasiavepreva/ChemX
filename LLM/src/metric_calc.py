@@ -5,10 +5,8 @@ import argparse
 import numpy as np
 from rdkit import Chem
 from datasets import load_dataset
-
 from rdkit import RDLogger 
 RDLogger.DisableLog('rdApp.*')
-
 from datasets import load_dataset
 
 from constants import DATASETS, DATASETS_IDS, EXTRACTED_COLUMNS, NUMERIC_COLUMNS, SMILES_COLS
