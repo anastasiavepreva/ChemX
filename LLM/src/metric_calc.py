@@ -24,8 +24,8 @@ def select_open_access(df_dataset: pd.DataFrame) -> pd.DataFrame:
 
 def prepare_dataset(dataset: str, dataset_id: str, n_cols: list[str], s_cols: list[str]) -> pd.DataFrame:
     """Prepares the dataset by cleaning, converting columns, and processing open-access rows."""
-    dataset = load_dataset(dataset_id)
-    df_dataset = dataset["train"].to_pandas()
+    dataset_hf = load_dataset(dataset_id)
+    df_dataset = dataset_hf["train"].to_pandas()
     
     for col in n_cols:
         df_dataset[col] = df_dataset[col].apply(lambda x: convert_comma(x))

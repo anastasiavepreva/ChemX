@@ -2,8 +2,9 @@ from pdf2image import convert_from_path
 import os, argparse, sys
 import pandas as pd
 from tqdm import tqdm
+from datasets import load_dataset
 
-from constants import DATASETS, MAGNETIC_ARTICLES, SELTOX_ARTICLES
+from constants import DATASETS, DATASETS_IDS, MAGNETIC_ARTICLES, SELTOX_ARTICLES
 
 def get_parameters() -> argparse.Namespace:
     """Parses and returns command-line arguments for dataset selection and Poppler path."""
@@ -26,7 +27,9 @@ def main() -> None:
     """
     args = vars(get_parameters())
     dataset = args['dataset']
-    df_dataset = pd.read_csv(f'data/datasets/{dataset}.csv')
+    dataset_id = DATASETS_IDS[dataset]
+    dataset_hf = load_dataset(dataset_id)
+    df_dataset = dataset_hf["train"].to_pandas()
     
     folder_name = 'pdf_' + dataset
     merged_folder_name = 'pdf_' + dataset + '_merged'

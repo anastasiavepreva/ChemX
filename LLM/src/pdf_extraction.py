@@ -3,11 +3,12 @@ import argparse, os, os.path
 import pandas as pd
 from tqdm import tqdm
 import json
+from datasets import load_dataset
 
 from openai import OpenAI
 from openai.types.beta.threads.message_create_params import Attachment, AttachmentToolFileSearch
 
-from constants import DATASETS, MAGNETIC_ARTICLES, SELTOX_ARTICLES
+from constants import DATASETS, DATASETS_IDS, MAGNETIC_ARTICLES, SELTOX_ARTICLES
 
 def get_parameters() -> argparse.Namespace:
     """Parses and returns command-line arguments for dataset selection and OpenAI API key."""
@@ -47,6 +48,9 @@ def main() -> None:
     args = vars(get_parameters())
     api_key = args['openai_api_key']
     dataset = args['dataset']
+    dataset_id = DATASETS_IDS[dataset]
+    dataset_hf = load_dataset(dataset_id)
+    df_dataset = dataset_hf["train"].to_pandas()
     
     client = OpenAI(api_key=api_key)
 
