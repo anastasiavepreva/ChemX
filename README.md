@@ -1,4 +1,4 @@
-# ChemX: A Multimodal Benchmark for Automated Information Extraction in Chemistry
+# ChemX: A Collection of Chemistry Datasets for Benchmarking Automated Information Extraction
 
 
 ## Abstract
