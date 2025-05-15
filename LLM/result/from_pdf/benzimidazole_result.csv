@@ -1,0 +1,343 @@
+pdf,description,instructions,prompt,output
+s41598-022-21435-6.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""11h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.00001,""target_units"":""μg/mL"",""bacteria"":""Staphylococcus aureus ATCC 25923""},{""compound_id"":""12h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.0003,""target_units"":""μg/mL"",""bacteria"":""Staphylococcus aureus ATCC 25923""},{""compound_id"":""11i"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.009,""target_units"":""μg/mL"",""bacteria"":""Staphylococcus aureus ATCC 25923""},{""compound_id"":""11g"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.009,""target_units"":""μg/mL"",""bacteria"":""Staphylococcus aureus ATCC 25923""},{""compound_id"":""11h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.004,""target_units"":""μg/mL"",""bacteria"":""Escherichia coli ATCC 25922""},{""compound_id"":""12h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.004,""target_units"":""μg/mL"",""bacteria"":""Escherichia coli ATCC 25922""},{""compound_id"":""11f"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.009,""target_units"":""μg/mL"",""bacteria"":""Escherichia coli ATCC 25922""},{""compound_id"":""7h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.001,""target_units"":""μg/mL"",""bacteria"":""Escherichia coli ATCC 25922""}]}"
+antibiotics10081002.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""31a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":8,""target_units"":""µg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""31a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":8,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""32a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":16,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""67"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.98,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""67"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":0.98,""target_units"":""µg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""70"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":12.5,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""70"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":50,""target_units"":""µg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""74"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":25.3,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""74"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":16.5,""target_units"":""µg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""76a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":10,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""76a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":7,""target_units"":""µg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""77b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":18,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""78b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":18,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""80b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":14,""target_units"":""µg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""80b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":14,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""80h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":19,""target_units"":""µg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""80h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":18,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""83a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":156.25,""target_units"":""µg/mL"",""bacteria"":""Staphylococcus aureus""}]}"
+intechopen.108949.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""XLV"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""XLV"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""XLVI"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""XLVI"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""XLVII"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""XLVII"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""XLVIII"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""XLVIII"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":6.25,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""LV"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":10,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""LV"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":20,""target_units"":""μg/mL"",""bacteria"":""E. coli""}]}"
+RJC.2023.1638382.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""34"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":7.81,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""35"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":7.81,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""3"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":12.5,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""6"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":16,""target_units"":""μg/mL"",""bacteria"":""Staphylococci""},{""compound_id"":""4"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":32,""target_units"":""μg/mL"",""bacteria"":""multidrug-resistant bacterial strain""}]}"
+s13065-018-0479-1.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""6a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":32,""target_units"":""μg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""6a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":64,""target_units"":""μg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""4a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":32,""target_units"":""μg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""4a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":64,""target_units"":""μg/mL"",""bacteria"":""Staphylococcus aureus""}]}"
+2023.12.si5a.0471.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""1"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":0.73,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""1"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.63,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""2"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.64,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""2"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.64,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""3"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.35,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""3"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.65,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""4"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":0.82,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""4"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.72,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""5"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.67,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""5"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.67,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""6"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.67,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""6"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.67,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""7"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.37,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""7"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.67,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""8"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.59,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""8"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.89,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""9"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.40,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""9"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.70,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""10"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.16,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""10"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.76,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""11"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.00,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""11"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.60,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""12"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":2.40,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""12"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.19,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""13"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.75,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""13"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.15,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""14"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":2.30,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""14"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.39,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""15"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":2.29,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""15"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.39,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""16"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.76,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""16"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.16,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""17"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.46,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""17"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.16,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""18"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.43,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""18"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.13,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""19"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.69,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""19"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.09,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""20"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.66,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""20"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.36,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""21"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.45,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""21"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.15,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""22"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.76,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""22"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.15,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""23"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.78,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""23"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.18,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""24"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.46,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""24"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.16,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""25"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.78,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""25"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.18,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""26"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.47,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""26"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.17,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""27"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.76,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""27"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.16,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""28"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.69,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""28"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.39,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""29"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.67,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""29"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.37,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""30"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.48,""target_units"":""μM"",""bacteria"":""Escherichia Coli""},{""compound_id"":""30"",""smiles"":""CC1=NC=CN1C2=NC=CC=C2"",""target_type"":""pMIC"",""target_relation"":""="",""target_value"":1.17,""target_units"":""μM"",""bacteria"":""Staphylococcus aureus""}]}"
+acsomega.2c06142.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""5a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5c"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":62.5,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5d"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":62.5,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5e"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5f"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":62.5,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5g"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""5a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""5b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""5c"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":62.5,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""5d"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":62.5,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""5e"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""5f"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":31.25,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""5g"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":62.5,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""5h"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":125,""target_units"":""μg/mL"",""bacteria"":""S. aureus""}]}"
+antibiotics12071220.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""37b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":3.125,""target_units"":""μg/mL"",""bacteria"":""Staphylococcus aureus""},{""compound_id"":""37b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":3.125,""target_units"":""μg/mL"",""bacteria"":""Escherichia coli""},{""compound_id"":""6a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":64,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""6b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":128,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""6c"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":128,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""6d"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":128,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""6e"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":128,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""6f"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":512,""target_units"":""μg/mL"",""bacteria"":""S. aureus""},{""compound_id"":""6a"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":128,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""6b"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":128,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""6c"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":64,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""6d"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":64,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""6e"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":64,""target_units"":""μg/mL"",""bacteria"":""E. coli""},{""compound_id"":""6f"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":256,""target_units"":""μg/mL"",""bacteria"":""E. coli""}]}"
+d2ra06667j.pdf,You are a domain-specific chemical information extraction assistant.,"You specialize in chemistry of small molecules. In particular, your area is antibiotics and their properties.","Your task is to extract **every** mention of MIC or pMIC measurements against Staphylococcus aureus and Escherichia coli bacteria for **ALL** benzimidazole antibiotics from a scientific article and output a **JSON array** of objects **only** (no markdown, no commentary, no extra text).
+Fields for each object:
+- `compound_id` (string): ID of a molecule within the article, as cited in the text, e.g. `""5a""`, `""Compound 3""`.
+- `smiles` (string): full SMILES representation of a benzimidazole antibiotic.
+- `target_type` (string): type of measurement, either `""MIC""` or `""pMIC""`, exactly as stated.  
+- `target_relation` (string): one of `""=""`, `""<""`, or `"">""`. If no relation symbol is shown, use `""=""`.  
+- `target_value` (number): the numeric value of MIC/pMIC (without quotes).  
+- `target_units` (string): MIC units, e.g. `""μg/mL""`, `""mg/L""`, etc.  
+- `bacteria` (string): the organism against which MIC/pMIC was measured, named exactly as in the text.
+Extraction rules:
+1. Extract **each** MIC/pMIC mention as a separate object. If multiple MIC/pMIC are reported for the same compound against different bacteria, list them as separate entries.
+2. Do **not** filter, group, summarize, or deduplicate. Include repeated mentions and duplicates if they occur in different contexts. 
+3. If a range is given (e.g., “2–8 μg/mL”), leave it as a range. 
+4. If a molecule is fully depicted in a figure, write it as a SMILES string. If a molecule is depicted as a scaffold and residues separately in different places of an article, connect them by compound ID into one molecule and write it as a single SMILES string.
+5. Extract only measurements with Staphylococcus aureus and Escherichia coli. Record full names, abbreviations, or any related taxonomic identifiers of bacteria.
+6. If you cannot find a required field for an object, re-check the context; if it’s still absent, set that field’s value to `""NOT_DETECTED""`.
+7. The example of JSON below shows only two extracted samples, however your output should contain **all** MIC or pMIC measurements of benzimidazole antibiotics present in the article.
+Output **must** be a single JSON array, like:
+[
+  {
+    ""compound_id"": ""11h"",
+    ""smiles"": ""O=C(OCC)C1=C(N(C(=O)N(C1C2=C(C=CS2)C)[H])[H])C[N]3C=NC4=C3C=C(C=C4)[N+](=O)[O-]"",
+    ""target_type"": ""MIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 1,
+    ""target_units"": ""mmol/l"",
+    ""bacteria"": ""methicillin-susceptible S. aureus""
+  },
+  {
+    ""compound_id"": ""5a"",
+    ""smiles"": ""CCN1C=C(C(=O)C2=CC(=C(C=C21)N3CCN(CC3)C4=NC=CC(=N4)N)F)C(=O)O"",
+    ""target_type"": ""pMIC"",
+    ""target_relation"": ""<"",
+    ""target_value"": 2,
+    ""target_units"": ""μg/mL"",
+    ""bacteria"": ""Escherichia coli""
+  }
+]","{""samples"":[{""compound_id"":""4c"",""smiles"":""NOT_DETECTED"",""target_type"":""MIC"",""target_relation"":""="",""target_value"":16,""target_units"":""mg/mL"",""bacteria"":""Escherichia coli""}]}"
