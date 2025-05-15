@@ -127,3 +127,6 @@ SELTOX_ARTICLES = ['156_1-s2.0-S294982952400024X-main.pdf',
        '118_1-s2.0-S1319610314001586-main.pdf',
        '128_1-s2.0-S2211715623002229-main.pdf',
        '219_1-s2.0-S1018364720303001-main.pdf']
+
+# PROMPT
+PROMPT_DESCRIPTION = "You are a domain-specific chemical information extraction assistant."
