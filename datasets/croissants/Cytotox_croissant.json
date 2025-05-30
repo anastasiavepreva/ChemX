@@ -1,0 +1,600 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "arrayShape": "cr:arrayShape",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "repo",
+      "name": "repo",
+      "description": "The Hugging Face git repository.",
+      "contentUrl": "https://huggingface.co/datasets/ai-chem/Cytotox/tree/refs%2Fconvert%2Fparquet",
+      "encodingFormat": "git+https",
+      "sha256": "https://github.com/mlcommons/croissant/issues/80"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "parquet-files-for-config-default",
+      "containedIn": {
+        "@id": "repo"
+      },
+      "encodingFormat": "application/x-parquet",
+      "includes": "default/*/*.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "dataType": "cr:Split",
+      "key": {
+        "@id": "default_splits/split_name"
+      },
+      "@id": "default_splits",
+      "name": "default_splits",
+      "description": "Splits for the default config.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default_splits/split_name",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "default_splits/split_name": "train"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "default",
+      "description": "ai-chem/Cytotox - 'default' subset",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default/split",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "fileProperty": "fullpath"
+            },
+            "transform": {
+              "regex": "default/(?:partial-)?(train)/.+parquet$"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "default_splits/split_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/sn",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "sn"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/material",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "material"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/shape",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "shape"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/coat_functional_group",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "coat_functional_group"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/synthesis_method",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "synthesis_method"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/surface_charge",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "surface_charge"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/size_in_medium_nm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "size_in_medium_nm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/zeta_in_medium_mv",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "zeta_in_medium_mv"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/no_of_cells_cells_well",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "no_of_cells_cells_well"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/human_animal",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "human_animal"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/cell_source",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "cell_source"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/cell_tissue",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "cell_tissue"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/cell_morphology",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "cell_morphology"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/cell_age",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "cell_age"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/time_hr",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "time_hr"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/concentration",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "concentration"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/test",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "test"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/test_indicator",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "test_indicator"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/viability__",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "viability_%"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/doi",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/article_list",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "article_list"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/core_nm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "core_nm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/hydrodynamic_nm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "hydrodynamic_nm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/potential_mv",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "potential_mv"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/cell_type",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "cell_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/journal_name",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "journal_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/publisher",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "publisher"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/year",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "year"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/journal_is_oa",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "journal_is_oa"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/is_oa",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "is_oa"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/oa_status",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "oa_status"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/pdf",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "pdf"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/access",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "access"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "name": "Cytotox",
+  "identifier": "10.57967/hf/5581",
+  "description": "ai-chem/Cytotox dataset hosted on Hugging Face and contributed by the HF Datasets community",
+  "alternateName": [
+    "ai-chem/Cytotox"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Center for AI in Chemistry @ ITMO University",
+    "url": "https://huggingface.co/ai-chem"
+  },
+  "keywords": [
+    "mit",
+    "1K - 10K",
+    "parquet",
+    "Tabular",
+    "Text",
+    "Datasets",
+    "pandas",
+    "Croissant",
+    "Polars",
+    "doi:10.57967/hf/5581",
+    "🇺🇸 Region: US"
+  ],
+  "citeAs": "@misc{center_for_ai_in_chemistry_@_itmo_university_2025, author = { Center for AI in Chemistry @ ITMO University }, title = { Cytotox (Revision 81d0e71) }, year = 2025, url = { https://huggingface.co/datasets/ai-chem/Cytotox }, doi = { 10.57967/hf/5581 }, publisher = { Hugging Face } }",
+  "version": 1.0,
+  "isAccessibleForFree": true,
+  "datePublished": "2025-05-15",
+  "rai:dataCollection": "The data was collected from full-text articles in PDF format and supplementary materials. Extraction was performed manually by annotators with expertise in chemistry.",
+  "rai:personalSensitiveInformation": "There is no personal or sensitive information in the dataset. Only depersonalized experimental data from scientific publications is used, including data on cell lines.",
+  "rai:annotatorDemographics": "The datasets were annotated by Russian women, aged 22 to 25, who are master's and PhD students specializing in chemistry and data science.",
+  "rai:dataBiases": "Potential biases may arise from the uneven representation of nanoparticle types, the possible predominance of frequently studied cell lines, and missing data in cases where measurements were not reported.",
+  "rai:dataLimitations": "The data is limited to in vitro studies and is not suitable for predicting in vivo effects or clinical use; missing values (e.g., zeta potential) are possible, and minor formatting or terminology inconsistencies across publications may impact model quality.",
+  "rai:dataSocialImpact": "The dataset aims to enhance the extraction algorithms for nanoparticles and their toxicity, enabling more effective applications in medicine and environmental science.",
+  "license": "https://choosealicense.com/licenses/mit/",
+  "url": "https://huggingface.co/datasets/ai-chem/Cytotox"
+}

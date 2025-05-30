@@ -1,0 +1,639 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "repo",
+      "name": "repo",
+      "description": "The Hugging Face git repository.",
+      "contentUrl": "https://huggingface.co/datasets/ai-chem/Co-crystals/tree/refs%2Fconvert%2Fparquet",
+      "encodingFormat": "git+https",
+      "sha256": "https://github.com/mlcommons/croissant/issues/80"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "parquet-files-for-config-default",
+      "containedIn": {
+        "@id": "repo"
+      },
+      "encodingFormat": "application/x-parquet",
+      "includes": "default/*/*.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "dataType": "cr:Split",
+      "key": {
+        "@id": "default_splits/split_name"
+      },
+      "@id": "default_splits",
+      "name": "default_splits",
+      "description": "Splits for the default config.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default_splits/split_name",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "default_splits/split_name": "train"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "default",
+      "description": "ai-chem/Co-crystals - 'default' subset",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default/split",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "fileProperty": "fullpath"
+            },
+            "transform": {
+              "regex": "default/(?:partial-)?(train)/.+parquet$"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "default_splits/split_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/pdf",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "pdf"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/doi",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/supplementary",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "supplementary"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/authors",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "authors"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/journal",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "journal"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/year",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "year"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/page",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "page"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/access",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "access"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_cocrystal",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_cocrystal"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_cocrystal_type_file",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_cocrystal_type_file"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_cocrystal_page",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_cocrystal_page"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_cocrystal_origin",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_cocrystal_origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/ratio_cocrystal",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "ratio_cocrystal"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/ratio_cocrystal_page",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "ratio_cocrystal_page"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/ratio_cocrystal_page.1",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "ratio_cocrystal_page.1"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/ratio_cocrystal_origin",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "ratio_cocrystal_origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_drug",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_drug"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_drug_type_file",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_drug_type_file"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_drug_origin",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_drug_origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_drug_page",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_drug_page"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_drug",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_drug"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_drug_type_file",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_drug_type_file"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_drug_origin",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_drug_origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_drug_page",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_drug_page"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_coformer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_coformer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_coformer_type_file",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_coformer_type file"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_coformer_origin",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_coformer_origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/name_coformer_page",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "name_coformer_page"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_coformer",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_coformer"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_coformer_type_file",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_coformer_type file"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_coformer_origin",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_coformer_origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/SMILES_coformer_page",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "SMILES_coformer_page"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/photostability_change",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "photostability_change"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/photostability_change_type_file",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "photostability_change_type_file"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/photostability_change_origin",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "photostability_change_origin"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/photostability_change_page",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "photostability_change_page"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "name": "Co-crystals",
+  "identifier": "10.57967/hf/5573",
+  "description": "ai-chem/Co-crystals dataset hosted on Hugging Face and contributed by the HF Datasets community",
+  "alternateName": [
+    "ai-chem/Co-crystals"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Center for AI in Chemistry @ ITMO University",
+    "url": "https://huggingface.co/ai-chem"
+  },
+  "keywords": [
+    "mit",
+    "< 1K",
+    "parquet",
+    "Tabular",
+    "Text",
+    "Datasets",
+    "pandas",
+    "Croissant",
+    "Polars",
+    "doi:10.57967/hf/5573",
+    "🇺🇸 Region: US"
+  ],
+  "citeAs": "@misc{center_for_ai_in_chemistry_@_itmo_university_2025, author = { Center for AI in Chemistry @ ITMO University }, title = { Co-crystals (Revision b6f6c13) }, year = 2025, url = { https://huggingface.co/datasets/ai-chem/Co-crystals }, doi = { 10.57967/hf/5573 }, publisher = { Hugging Face } }",
+  "version": 1.0,
+  "isAccessibleForFree": true,
+  "datePublished": "2025-05-15",
+  "rai:dataCollection": "The data was collected from full-text articles in PDF format and supplementary materials. Extraction was performed manually by annotators with expertise in chemistry.",
+  "rai:personalSensitiveInformation": "There is no personal or sensitive information in the dataset. Only depersonalized experimental data from scientific publications is used, including data on cell lines.",
+  "rai:annotatorDemographics": "The datasets were annotated by Russian women, aged 22 to 25, who are master's and PhD students specializing in chemistry and data science.",
+  "rai:dataBiases": "Potential sources of bias include the focus on compounds with explicitly reported changes in photostability, the exclusion of entries lacking available XRD structures, incorrect extractions, or undefined degradation mechanisms, and a possible bias toward positive results (i.e., improved photostability).",
+  "rai:dataSocialImpact": "The dataset aims to enhance the extraction algorithms for cocrystals of small molecules and photostability, enabling more effective applications in agriculture.",
+  "rai:dataLimitations": "Only entries with complete structural information are included; crystal structures without available structural data (CSD entry) and cases with extraction errors or lacking decomposition details are excluded; the dataset is limited to 70 entries, which constrains its statistical power.",
+  "license": "https://choosealicense.com/licenses/mit/",
+  "url": "https://huggingface.co/datasets/ai-chem/Co-crystals"
+}

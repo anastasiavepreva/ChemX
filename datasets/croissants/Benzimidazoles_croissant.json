@@ -1,0 +1,496 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "rai:": "http://mlcommons.org/croissant/RAI/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "repo",
+      "name": "repo",
+      "description": "The Hugging Face git repository.",
+      "contentUrl": "https://huggingface.co/datasets/ai-chem/Benzimidazoles/tree/refs%2Fconvert%2Fparquet",
+      "encodingFormat": "git+https",
+      "sha256": "https://github.com/mlcommons/croissant/issues/80"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "parquet-files-for-config-default",
+      "containedIn": {
+        "@id": "repo"
+      },
+      "encodingFormat": "application/x-parquet",
+      "includes": "default/*/*.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "dataType": "cr:Split",
+      "key": {
+        "@id": "default_splits/split_name"
+      },
+      "@id": "default_splits",
+      "name": "default_splits",
+      "description": "Splits for the default config.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default_splits/split_name",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "default_splits/split_name": "train"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "default",
+      "description": "ai-chem/Benzimidazoles - 'default' subset",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default/split",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "fileProperty": "fullpath"
+            },
+            "transform": {
+              "regex": "default/(?:partial-)?(train)/.+parquet$"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "default_splits/split_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/smiles",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "smiles"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/doi",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/publisher",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "publisher"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/year",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "year"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/access",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "access"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/compound_id",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "compound_id"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/target_type",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "target_type"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/target_relation",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "target_relation"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/target_value",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "target_value"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/target_units",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "target_units"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/bacteria",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "bacteria"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/bacteria_unified",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "bacteria_unified"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/page_bacteria",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "page_bacteria"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/origin_bacteria",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "origin_bacteria"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/section_bacteria",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "section_bacteria"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/subsection_bacteria",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "subsection_bacteria"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/page_target",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "page_target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/origin_target",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "origin_target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/section_target",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "section_target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/subsection_target",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "subsection_target"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/page_scaffold",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "page_scaffold"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/origin_scaffold",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "origin_scaffold"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/page_residue",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "page_residue"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/origin_residue",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "origin_residue"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/pdf",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "pdf"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "name": "Benzimidazoles",
+  "identifier": "10.57967/hf/5578",
+  "description": "ai-chem/Benzimidazoles dataset hosted on Hugging Face and contributed by the HF Datasets community",
+  "alternateName": [
+    "ai-chem/Benzimidazoles"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Center for AI in Chemistry @ ITMO University",
+    "url": "https://huggingface.co/ai-chem"
+  },
+  "keywords": [
+    "mit",
+    "1K - 10K",
+    "parquet",
+    "Tabular",
+    "Text",
+    "Datasets",
+    "pandas",
+    "Croissant",
+    "Polars",
+    "doi:10.57967/hf/5578",
+    "🇺🇸 Region: US"
+  ],
+  "version": 1.0,
+  "isAccessibleForFree": true,
+  "datePublished": "2025-05-15",
+  "rai:dataCollection": "The data was collected from full-text articles in PDF format and supplementary materials. Extraction was performed manually by annotators with expertise in chemistry.",
+  "rai:personalSensitiveInformation": "There is no personal or sensitive information in the dataset. Only depersonalized experimental data from scientific publications is used, including data on cell lines.",
+  "rai:annotatorDemographics": "The datasets were annotated by Russian women, aged 22 to 25, who are master's and PhD students specializing in chemistry and data science.",
+  "rai:dataBiases": "Possible biases include the limitation to only two bacterial species, S. aureus and E. coli, a selective focus on benzimidazole-based compounds, and a restricted number of MIC/pMIC values depending on data availability in the source publications.",
+  "rai:dataLimitations": "The dataset contains some incomplete or underspecified structures (e.g., scaffold + residue), MIC/pMIC values may vary depending on measurement methods with no normalization described, it includes only S. aureus and E. coli while excluding other pathogens, and some fields are marked as “NOT_DETECTED,” reflecting incomplete source data.",
+  "rai:dataSocialImpact": "The dataset aims to enhance the extraction algorithms for drug-like molecules and their antibacterial activity, enabling more effective applications in medicine and drug design.",
+  "citeAs": "@misc{center_for_ai_in_chemistry_@_itmo_university_2025, author = { Center for AI in Chemistry @ ITMO University }, title = { Benzimidazoles (Revision 28b44d4) }, year = 2025, url = { https://huggingface.co/datasets/ai-chem/Benzimidazoles }, doi = { 10.57967/hf/5578 }, publisher = { Hugging Face } }",
+  "license": "https://choosealicense.com/licenses/mit/",
+  "url": "https://huggingface.co/datasets/ai-chem/Benzimidazoles"
+}

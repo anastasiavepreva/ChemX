@@ -1,0 +1,626 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "conformsTo": "dct:conformsTo",
+    "cr": "http://mlcommons.org/croissant/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataBiases": "cr:dataBiases",
+    "dataCollection": "cr:dataCollection",
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "dct": "http://purl.org/dc/terms/",
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "personalSensitiveInformation": "cr:personalSensitiveInformation",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "sc": "https://schema.org/",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
+  },
+  "@type": "sc:Dataset",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "repo",
+      "name": "repo",
+      "description": "The Hugging Face git repository.",
+      "contentUrl": "https://huggingface.co/datasets/ai-chem/SelTox/tree/refs%2Fconvert%2Fparquet",
+      "encodingFormat": "git+https",
+      "sha256": "https://github.com/mlcommons/croissant/issues/80"
+    },
+    {
+      "@type": "cr:FileSet",
+      "@id": "parquet-files-for-config-default",
+      "containedIn": {
+        "@id": "repo"
+      },
+      "encodingFormat": "application/x-parquet",
+      "includes": "default/*/*.parquet"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "dataType": "cr:Split",
+      "key": {
+        "@id": "default_splits/split_name"
+      },
+      "@id": "default_splits",
+      "name": "default_splits",
+      "description": "Splits for the default config.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default_splits/split_name",
+          "dataType": "sc:Text"
+        }
+      ],
+      "data": [
+        {
+          "default_splits/split_name": "train"
+        }
+      ]
+    },
+    {
+      "@type": "cr:RecordSet",
+      "@id": "default",
+      "description": "ai-chem/SelTox - 'default' subset",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "default/split",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "fileProperty": "fullpath"
+            },
+            "transform": {
+              "regex": "default/(?:partial-)?(train)/.+parquet$"
+            }
+          },
+          "references": {
+            "field": {
+              "@id": "default_splits/split_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/sn",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "sn"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/np",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "np"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/coating",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "coating"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/bacteria",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "bacteria"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/mdr",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "mdr"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/strain",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "strain"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/np_synthesis",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "np_synthesis"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/method",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "method"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/mic_np__g_ml",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "mic_np_µg_ml"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/concentration",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "concentration"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/zoi_np_mm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "zoi_np_mm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/np_size_min_nm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "np_size_min_nm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/np_size_max_nm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "np_size_max_nm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/np_size_avg_nm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "np_size_avg_nm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/shape",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "shape"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/time_set_hours",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "time_set_hours"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/zeta_potential_mV",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "zeta_potential_mV"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/solvent_for_extract",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "solvent_for_extract"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/temperature_for_extract_C",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "temperature_for_extract_C"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/duration_preparing_extract_min",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "duration_preparing_extract_min"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/precursor_of_np",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "precursor_of_np"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/concentration_of_precursor_mM",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "concentration_of_precursor_mM"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/hydrodynamic_diameter_nm",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "hydrodynamic_diameter_nm"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/ph_during_synthesis",
+          "dataType": "cr:Float64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "ph_during_synthesis"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/reference",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "reference"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/doi",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "doi"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/article_list",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "article_list"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/journal_name",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "journal_name"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/publisher",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "publisher"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/year",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "year"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/title",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "title"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/journal_is_oa",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "journal_is_oa"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/is_oa",
+          "dataType": "sc:Boolean",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "is_oa"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/oa_status",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "oa_status"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/pdf",
+          "dataType": "sc:Text",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "pdf"
+            }
+          }
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "default/access",
+          "dataType": "cr:Int64",
+          "source": {
+            "fileSet": {
+              "@id": "parquet-files-for-config-default"
+            },
+            "extract": {
+              "column": "access"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "name": "SelTox",
+  "identifier": "10.57967/hf/5580",
+  "description": "ai-chem/SelTox dataset hosted on Hugging Face and contributed by the HF Datasets community",
+  "alternateName": [
+    "ai-chem/SelTox"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Center for AI in Chemistry @ ITMO University",
+    "url": "https://huggingface.co/ai-chem"
+  },
+  "keywords": [
+    "mit",
+    "1K - 10K",
+    "parquet",
+    "Tabular",
+    "Text",
+    "Datasets",
+    "pandas",
+    "Croissant",
+    "Polars",
+    "doi:10.57967/hf/5580",
+    "🇺🇸 Region: US"
+  ],
+  "citeAs": "@misc{center_for_ai_in_chemistry_@_itmo_university_2025, author = { Center for AI in Chemistry @ ITMO University }, title = { SelTox (Revision 15c245c) }, year = 2025, url = { https://huggingface.co/datasets/ai-chem/SelTox }, doi = { 10.57967/hf/5580 }, publisher = { Hugging Face } }",
+  "version": 1.0,
+  "isAccessibleForFree": true,
+  "datePublished": "2025-05-15",
+  "rai:dataCollection": "The data was collected from full-text articles in PDF format and supplementary materials. Extraction was performed manually by annotators with expertise in chemistry.",
+  "rai:personalSensitiveInformation": "There is no personal or sensitive information in the dataset. Only depersonalized experimental data from scientific publications is used, including data on cell lines.",
+  "rai:annotatorDemographics": "The datasets were annotated by Russian women, aged 22 to 25, who are master's and PhD students specializing in chemistry and data science.",
+  "rai:dataBiases": "Potential biases are associated with a skew toward certain types of nanoparticles (e.g., popular or extensively studied compounds), uneven coverage of bacterial strains, a predominance of positive results due to reliance on published articles, and missing information for specific parameters such as zeta potential.",
+  "rai:dataLimitations": "The data pertains exclusively to in vitro analyses and does not reflect in vivo effects. It does not cover all possible bacterial strains, and methods used across different publications may be partially inconsistent. Some values, such as zeta potential or strain information, may also be missing.",
+  "rai:dataSocialImpact": "The dataset aims to enhance the extraction algorithms for nanoparticles and their toxicity, enabling more effective applications in medicine and environmental science.",
+  "license": "https://choosealicense.com/licenses/mit/",
+  "url": "https://huggingface.co/datasets/ai-chem/SelTox"
+}
