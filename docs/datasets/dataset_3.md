@@ -64,6 +64,7 @@ A complete data table can be found in the internal dataset file: `synergy_NeurIP
 | oa_status                                      | OA level (green, hybrid)                                                       |
 | pdf                                            | PDF filename in archive                                                        |
 | access                                         | 1 = OA, 0 = closed                                                             |
+
 ---
 
 ## Metadata
