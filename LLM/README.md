@@ -37,3 +37,7 @@ Results will appear in the ```result/from_image``` folder.
 ```python src/metric_calc.py  --dataset <dataset>  --source <pdf_or_image>```
 
 Metrics will appear in the ```result/metrics``` folder.
+
+7. Extraction with SLM Matrix
+
+```python src/run_moa.py ```
